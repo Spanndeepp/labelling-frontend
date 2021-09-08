@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
 import axios from "axios";
-
 import Login from "./Components/Login/Login";
-import Dashboard from "./Components/Dashboard/Dashboard";
+// import Dashboard from "./Components/Dashboard/Dashboard";
 import Home from "./Components/Home/Home";
-
+import Manager from "./Components/Manager/Manager";
+import Labeller from "./Components/Labeller/Labeller";
 import PrivateRoute from "./Utils/PrivateRoute";
 import PublicRoute from "./Utils/PublicRoute";
 import {
@@ -28,12 +28,8 @@ const App = () => {
     if (!user) {
       return;
     }
-
-    // console.log('toker', token);
-    // console.log('usen', user);
-
     axios
-      .get(`http://localhost:4000/api/auth/me`, {
+      .get(`https://labelling-backend.herokuapp.com/api/auth/me`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
@@ -50,6 +46,7 @@ const App = () => {
         removeUserSession();
         setAuthLoading(false);
       });
+    return () => {};
   }, []);
 
   if (authLoading && getToken()) {
@@ -70,7 +67,7 @@ const App = () => {
             <NavLink activeClassName="active" to="/register">
               Register
             </NavLink>
-            <NavLink activeClassName="active" to="/dashboard">
+            <NavLink activeClassName="active" to="/labeller || /manager">
               Dashboard
             </NavLink>
           </div>
@@ -79,7 +76,8 @@ const App = () => {
               <Route exact path="/" component={Home} />
               <PublicRoute path="/register" component={Register} />
               <PublicRoute path="/login" component={Login} />
-              <PrivateRoute path="/dashboard" component={Dashboard} />
+              <PrivateRoute path="/manager" component={Manager} />
+              <PrivateRoute path="/labeller" component={Labeller} />
             </Switch>
           </div>
         </div>

@@ -28,16 +28,19 @@ const Login = (props) => {
     setError(null);
     setLoading(true);
     axios
-      .post("http://localhost:4000/api/auth/login", {
+      .post("https://labelling-backend.herokuapp.com/api/auth/login", {
         email: email.value,
         password: password.value,
       })
-      .then((response) => {
+      .then((res) => {
         setLoading(false);
-        // console.log('data', response.data);
-        setUserSession(response.data.token, response.data.user);
-        // console.log(response.data.user);
-        props.history.push("/dashboard");
+        if (res.data.flag === 0) {
+          setUserSession(res.data.token, res.data.labeller.email);
+          props.history.push("/labeller");
+        } else {
+          setUserSession(res.data.token, res.data.manager.email);
+          props.history.push("/manager");
+        }
       })
       .catch((error) => {
         setLoading(false);
