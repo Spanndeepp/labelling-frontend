@@ -1,0 +1,21 @@
+.para {
+  font-size: 36px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* height: 668px; */
+  color: white;
+  flex-direction: column;
+  background: url('../../Images/home.jpeg');
+  background-repeat: round;
+}
+
+.logo {
+  font-size: medium;
+  text-align: center;
+  margin-top: 66px;
+}
+
+.product-description {
+  font-size: large;
+}
