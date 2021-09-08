@@ -3,26 +3,27 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 import "./Register.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const Register = (props) => {
+const Register = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
     cpassword: "",
-    firstName: "",
-    lastName: "",
-    age: "",
-    gender: "",
+    name: "",
+    userType: "",
   });
+  const [phonevalue, setphoneValue] = useState();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
+  let url = "";
 
   let name, value;
   const handleInputs = (e) => {
@@ -32,6 +33,8 @@ const Register = (props) => {
     setUser({ ...user, [name]: value });
   };
 
+  const RadioEvent = (e) => setUser({ ...user, userType: e.target.value });
+
   useEffect(() => {
     document.getElementById("registration-container").style.height =
       window.innerHeight - 64 + "px";
@@ -39,18 +42,21 @@ const Register = (props) => {
 
   const handleRegister = () => {
     setError("");
+    if (user.userType === "") setError("Select a user type");
     if (user.cpassword !== user.password) setError("Passwords don't match");
     else if (user.password.length < 5)
       setError("Minimum length of password is 5 characters");
     else {
+      if (user.userType === "labeller")
+        url =
+          "https://labelling-backend.herokuapp.com/api/auth/registerLabeller";
+      else url = "https://labelling-backend.herokuapp.com/api/auth/register";
       axios
-        .post("http://localhost:4000/api/auth/register", {
+        .post(url, {
           email: user.email,
+          name: user.name,
           password: user.password,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          age: user.age,
-          gender: user.gender,
+          phone: phonevalue,
         })
         .then((res) => {
           setSuccess("Registration Successfull");
@@ -89,26 +95,26 @@ const Register = (props) => {
             <div id="registerHeading">
               <h1>Register Here!!</h1>
             </div>
+            <div className="register-radio" onChange={RadioEvent}>
+              <div className="register-radio-value">
+                <input type="radio" value="labeller" name="radio" />
+                <p>Labeller</p>
+              </div>
+              <div className="register-radio-value">
+                <input type="radio" value="manager" name="radio" />
+                <p>Manager</p>
+              </div>
+            </div>
             <div className="register-input-styles register-input-width">
               {/* <label className="Rlabelcontainer" htmlFor="name">First Name</label> */}
               <input
-                className="register-box register-inline-box"
+                className="register-box register-single-box"
                 type="text"
-                value={user.firstName}
+                value={user.name}
                 onChange={handleInputs}
-                placeholder="First Name"
-                name="firstName"
-                id="firstName"
-                required
-              />
-              <input
-                className="register-box register-inline-box register-right-box"
-                type="text"
-                value={user.lastName}
-                onChange={handleInputs}
-                placeholder="Last Name"
-                name="lastName"
-                id="lastName"
+                placeholder="Your Name"
+                name="name"
+                id="name"
                 required
               />
             </div>
@@ -151,14 +157,13 @@ const Register = (props) => {
             </div>
             <div className="register-input-styles ">
               {/* <label className="box inline-box" htmlFor="email">Email ID</label> */}
-              <input
+              <PhoneInput
                 className="register-box register-single-box"
                 type="text"
-                value={user.age}
-                onChange={handleInputs}
-                name="age"
-                id="age"
-                placeholder="Age"
+                value={phonevalue}
+                onChange={setphoneValue}
+                id="phone"
+                placeholder="Enter Phone No."
                 required
               />
             </div>
@@ -192,8 +197,7 @@ const Register = (props) => {
                 </Snackbar>
               </>
             )}
-            <div className="register-input-styles">
-              {/* <label className="labels box" for="gender">Gender:</label> */}
+            {/* <div className="register-input-styles">
               <select
                 className="register-box register-single-box register-drop-down "
                 id="gender"
@@ -206,7 +210,7 @@ const Register = (props) => {
                 <option value="OTHERS">Others</option>
               </select>
               <br />
-            </div>
+            </div> */}
             <div className="register-input-styles register-submit-btn">
               <input
                 id="submitDetails"
