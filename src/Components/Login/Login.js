@@ -35,12 +35,11 @@ const Login = (props) => {
       .then((res) => {
         setLoading(false);
         if (res.data.flag === 0) {
-          setUserSession(res.data.token, res.data.labeller.email);
-          props.history.push("/labeller");
-        } else {
-          setUserSession(res.data.token, res.data.manager.email);
-          props.history.push("/manager");
+          setUserSession("labeller", res.data.token, res.data.labeller.email);
+        } else if (res.data.flag === 1) {
+          setUserSession("manager", res.data.token, res.data.manager.email);
         }
+        props.history.push("/dashboard");
       })
       .catch((error) => {
         setLoading(false);

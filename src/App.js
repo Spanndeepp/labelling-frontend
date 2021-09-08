@@ -15,6 +15,7 @@ import {
   setUserSession,
 } from "./Utils/Common";
 import Register from "./Components/Register/Register";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 const App = () => {
   const [authLoading, setAuthLoading] = useState(true);
@@ -67,7 +68,7 @@ const App = () => {
             <NavLink activeClassName="active" to="/register">
               Register
             </NavLink>
-            <NavLink activeClassName="active" to="/labeller || /manager">
+            <NavLink activeClassName="active" exact to="/dashboard">
               Dashboard
             </NavLink>
           </div>
@@ -76,6 +77,7 @@ const App = () => {
               <Route exact path="/" component={Home} />
               <PublicRoute path="/register" component={Register} />
               <PublicRoute path="/login" component={Login} />
+              <PrivateRoute path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/manager" component={Manager} />
               <PrivateRoute path="/labeller" component={Labeller} />
             </Switch>

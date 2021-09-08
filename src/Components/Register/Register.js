@@ -50,7 +50,9 @@ const Register = () => {
       if (user.userType === "labeller")
         url =
           "https://labelling-backend.herokuapp.com/api/auth/registerLabeller";
-      else url = "https://labelling-backend.herokuapp.com/api/auth/register";
+      else
+        url =
+          "https://labelling-backend.herokuapp.com/api/auth/registerManager";
       axios
         .post(url, {
           email: user.email,
