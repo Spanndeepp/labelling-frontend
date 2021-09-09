@@ -24,8 +24,7 @@ function Labeller(props) {
 
   useEffect(() => {
     setSendFiles(selectedFiles);
-    // console.log(selectedFiles.length);
-    return;
+    return () => {};
   }, [selectedFiles]);
 
   return (
@@ -36,7 +35,7 @@ function Labeller(props) {
       <br />
       <br />
       <br />
-      <input type="file" onChange={handleSelect} multiple />
+      <input type="file" onChange={handleSelect} accept="image/*" multiple />
       <Filelist selectedFiles={sendFiles} />
       <ImageShow selectedFiles={sendFiles} initialCount={0} />
     </>
