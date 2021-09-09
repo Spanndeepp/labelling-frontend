@@ -11,6 +11,7 @@ import PublicRoute from "./Utils/PublicRoute";
 import {
   getToken,
   getUser,
+  getUserType,
   removeUserSession,
   setUserSession,
 } from "./Utils/Common";
@@ -22,13 +23,13 @@ const App = () => {
 
   useEffect(() => {
     const token = getToken();
-    if (!token) {
-      return;
-    }
+    if (!token) return;
+
     const user = getUser();
-    if (!user) {
-      return;
-    }
+    if (!user) return;
+
+    const userType = getUserType();
+    if (!userType) return;
     axios
       .get(`https://labelling-backend.herokuapp.com/api/auth/me`, {
         headers: {
@@ -39,8 +40,8 @@ const App = () => {
         },
       })
       .then((response) => {
-        // console.log(response);
-        setUserSession(response.data.token, response.data.user);
+        console.log(response);
+        setUserSession(userType, response.data.token, response.data.user);
         setAuthLoading(false);
       })
       .catch((error) => {

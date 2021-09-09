@@ -56,6 +56,7 @@ const Login = (props) => {
           setError("Email address or password is incorrect");
         else setError("Something went wrong. Please try again later.");
       });
+    return () => {};
   };
 
   const handleClose = (event, reason) => {
