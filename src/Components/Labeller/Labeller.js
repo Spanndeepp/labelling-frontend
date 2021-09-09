@@ -8,11 +8,11 @@ function Labeller(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [sendFiles, setSendFiles] = useState([]);
 
-  let user;
-  if (props.location.state !== undefined && props.location.state !== null) {
-    user = props.location.state.user;
-    // console.log(user);
-  }
+  // let user;
+  // if (props.location.state !== undefined && props.location.state !== null) {
+  //   user = props.location.state.user;
+  //   // console.log(user);
+  // }
   const handleLogout = () => {
     removeUserSession();
     props.history.push("/login");
