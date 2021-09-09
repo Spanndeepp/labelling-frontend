@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { removeUserSession } from "../../Utils/Common";
 import Filelist from "./Filelist";
+import ImageShow from "./ImageShow";
 
 function Labeller(props) {
   // console.log(props.location.state);
@@ -23,6 +24,8 @@ function Labeller(props) {
 
   useEffect(() => {
     setSendFiles(selectedFiles);
+    // console.log(selectedFiles.length);
+    return;
   }, [selectedFiles]);
 
   return (
@@ -33,7 +36,8 @@ function Labeller(props) {
       <br />
       <br />
       <input type="file" onChange={handleSelect} multiple />
-      <Filelist selectedFile={sendFiles} />
+      <Filelist selectedFiles={sendFiles} />
+      <ImageShow selectedFiles={sendFiles} />
     </>
   );
 }

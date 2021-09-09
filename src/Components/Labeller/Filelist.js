@@ -1,10 +1,16 @@
 import React from "react";
 
-function Filelist(selectedFile) {
-  console.log("Line4", selectedFile);
+function Filelist({ selectedFiles }) {
+  //   console.log("Line4", selectedFiles[0].name);
+  const fileNames = [];
+
+  for (let i = 0; i < selectedFiles.length; i++) {
+    fileNames.push(<div key={i}>{selectedFiles[i].name}</div>);
+  }
+
   return (
     <div>
-      File list will be displayed
+      {fileNames}
       <br />
     </div>
   );
