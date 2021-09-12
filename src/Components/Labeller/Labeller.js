@@ -7,6 +7,7 @@ function Labeller(props) {
   // console.log(props.location.state);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [sendFiles, setSendFiles] = useState([]);
+  const [initialCount, setInitialCount] = useState(0);
 
   let user;
   if (props.location.state !== undefined && props.location.state !== null) {
@@ -24,7 +25,7 @@ function Labeller(props) {
 
   useEffect(() => {
     setSendFiles(selectedFiles);
-    return () => {};
+    setInitialCount(0);
   }, [selectedFiles]);
 
   return (
@@ -37,7 +38,7 @@ function Labeller(props) {
       <br />
       <input type="file" onChange={handleSelect} accept="image/*" multiple />
       <Filelist selectedFiles={sendFiles} />
-      <ImageShow selectedFiles={sendFiles} initialCount={0} />
+      <ImageShow selectedFiles={sendFiles} initialCount={initialCount} />
     </>
   );
 }

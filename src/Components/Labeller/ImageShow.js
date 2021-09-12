@@ -1,27 +1,31 @@
 import React, { useEffect, useState, useReducer } from "react";
+import EditImage from "./EditImage";
 import "./ImageShow.css";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "increment":
-      return { count: state.count + 1 };
-    case "decrement":
-      return { count: state.count - 1 };
-    case "reset":
-      return { count: 0 };
-    default:
-      throw new Error();
-  }
-}
-
 function ImageShow({ selectedFiles, initialCount }) {
-  const [currImage, setCurrImage] = useState(null);
+  const [currImage, setCurrImage] = useState(
+    URL.createObjectURL(selectedFiles[initialCount])
+  );
+  const initialState = { count: initialCount };
   // const [currImageNo, setCurrImageNo] = useState(0);
 
   // const currImageNo = { count: 0 };
 
-  const [state, dispatch] = useReducer(reducer, initialCount);
-  console.log("ImageShow", selectedFiles.length, state.count);
+  function reducer(state, action) {
+    switch (action.type) {
+      case "increment":
+        return { count: state.count + 1 };
+      case "decrement":
+        return { count: state.count - 1 };
+      case "reset":
+        return { count: 0 };
+      default:
+        throw new Error();
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // console.log("ImageShow", selectedFiles.length, state.count);
 
   useEffect(() => {
     state.count < selectedFiles.length &&
@@ -54,12 +58,7 @@ function ImageShow({ selectedFiles, initialCount }) {
           Reset
         </button>
       </div>
-      <img
-        className="labelling-img"
-        src={currImage}
-        alt="Phone"
-        width="400px"
-      />
+      {currImage && <EditImage currImage={currImage} />}
     </>
   );
 }
