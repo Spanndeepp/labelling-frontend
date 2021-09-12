@@ -3,9 +3,8 @@ import EditImage from "./EditImage";
 import "./ImageShow.css";
 
 function ImageShow({ selectedFiles, initialCount }) {
-  const [currImage, setCurrImage] = useState(
-    URL.createObjectURL(selectedFiles[initialCount])
-  );
+  const [currImage, setCurrImage] = useState(selectedFiles[initialCount]);
+  const [edit, setEdit] = useState(false);
   const initialState = { count: initialCount };
   // const [currImageNo, setCurrImageNo] = useState(0);
 
@@ -57,8 +56,16 @@ function ImageShow({ selectedFiles, initialCount }) {
         >
           Reset
         </button>
+        <input
+          type="button"
+          onClick={() => {
+            !edit ? setEdit(true) : setEdit(false);
+            console.log(edit);
+          }}
+          value={edit ? "Save Selection" : "Select"}
+        />
       </div>
-      {currImage && <EditImage currImage={currImage} />}
+      {currImage && <EditImage currImage={currImage} edit={edit} />}
     </>
   );
 }
