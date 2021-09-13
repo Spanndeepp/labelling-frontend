@@ -4,7 +4,7 @@ import "./ImageShow.css";
 
 function ImageShow({ selectedFiles, initialCount }) {
   const [currImage, setCurrImage] = useState(selectedFiles[initialCount]);
-  const [edit, setEdit] = useState(false);
+  // const [edit, setEdit] = useState(false);
   const initialState = { count: initialCount };
   // const [currImageNo, setCurrImageNo] = useState(0);
 
@@ -44,38 +44,35 @@ function ImageShow({ selectedFiles, initialCount }) {
   return (
     <>
       <div>
-        {fileNames}
-        <br />
-      </div>
-      <div>
         <input
           type="button"
+          className="image-controls"
           onClick={() => dispatch({ type: "decrement" })}
           value="Previous"
           disabled={state.count === 0}
         />
         <input
           type="button"
+          className="image-controls"
           onClick={() => dispatch({ type: "increment" })}
           value="Next"
           disabled={state.count >= selectedFiles.length - 1}
         />
-        <button
-          onClick={() => dispatch({ type: "reset" })}
-          disabled={state.count === 0}
-        >
-          Reset
-        </button>
         <input
           type="button"
-          onClick={() => {
-            !edit ? setEdit(true) : setEdit(false);
-            console.log(edit);
-          }}
-          value={edit ? "Save Selection" : "Select"}
+          className="image-controls"
+          onClick={() => dispatch({ type: "reset" })}
+          disabled={state.count === 0}
+          value="Reset"
+        />
+        <input
+          type="button"
+          className="image-controls"
+          value="Save Selection"
         />
       </div>
-      {currImage && <EditImage currImage={currImage} edit={edit} />}
+      <div>{fileNames}</div>
+      {currImage && <EditImage currImage={currImage} />}
     </>
   );
 }

@@ -27,6 +27,7 @@
 
 .style-button:hover {
   background-color: #0e2b6d;
+  cursor: pointer;
 }
 
 .logout-button {

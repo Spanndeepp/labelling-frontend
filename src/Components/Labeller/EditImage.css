@@ -2,8 +2,19 @@
   z-index: 0;
   position: absolute;
   margin: 40px;
+  width: 750px;
+}
+
+.canvas-img:hover {
+  cursor: crosshair;
 }
 
 .labelling-img {
   margin: 40px;
+  width: 750px;
+  height: auto;
+}
+
+.image-area {
+  display: flex;
 }

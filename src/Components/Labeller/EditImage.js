@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./EditImage.css";
 
-const EditImage = ({ currImage, edit }) => {
+const EditImage = ({ currImage }) => {
   let ctx = null;
   const canvas = useRef();
   const image = useRef();
@@ -100,20 +100,18 @@ const EditImage = ({ currImage, edit }) => {
   };
 
   return (
-    <div>
-      {edit && (
-        <canvas
-          className="canvas-img"
-          ref={canvas}
-          onMouseMove={(e) => {
-            moveRect(r)(e);
-          }}
-          onMouseDown={(e) => init(e)}
-          onMouseUp={(e) => {
-            endit(e);
-          }}
-        />
-      )}
+    <div className="image-area">
+      <canvas
+        className="canvas-img"
+        ref={canvas}
+        onMouseMove={(e) => {
+          moveRect(r)(e);
+        }}
+        onMouseDown={(e) => init(e)}
+        onMouseUp={(e) => {
+          endit(e);
+        }}
+      />
       <img
         className="labelling-img"
         src={currImage}
