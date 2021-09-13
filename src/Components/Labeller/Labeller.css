@@ -1,7 +1,6 @@
 .labeller-info {
   font-size: 20px;
   margin: 10px;
-  width: 100%;
 }
 
 .object-data {
@@ -15,9 +14,7 @@
   font-weight: bold;
 }
 
-.logout-button {
-  right: 20px;
-  position: absolute;
+.style-button {
   font-size: 17px;
   border: none;
   border-radius: 10px;
@@ -28,6 +25,19 @@
   box-shadow: 2px 4px 4px #cdcdcd;
 }
 
-.logout-button:hover {
+.style-button:hover {
   background-color: #0e2b6d;
+}
+
+.logout-button {
+  right: 20px;
+  position: absolute;
+}
+
+.choose-files-button {
+  margin-left: 10px;
+}
+
+.file-controls {
+  display: flex;
 }

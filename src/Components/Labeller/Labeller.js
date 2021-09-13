@@ -35,7 +35,7 @@ function Labeller(props) {
         Hello Labeller <span className="bold-text">Name</span>
         <input
           type="button"
-          className="logout-button"
+          className="logout-button style-button"
           onClick={handleLogout}
           value="Logout"
         />
@@ -50,12 +50,17 @@ function Labeller(props) {
           <span className="bold-text">{user ? user.obj_submitted : 0}</span>
         </p>
       </div>
-      <br />
-      <br />
-      <br />
-      <input type="file" onChange={handleSelect} accept="image/*" multiple />
-      {/* <Filelist selectedFiles={sendFiles} /> */}
-      <ImageShow selectedFiles={sendFiles} initialCount={initialCount} />
+      <div className="file-controls">
+        <input
+          type="file"
+          className="choose-files-button"
+          onChange={handleSelect}
+          accept="image/*"
+          multiple
+        />
+        {/* <Filelist selectedFiles={sendFiles} /> */}
+        <ImageShow selectedFiles={sendFiles} initialCount={initialCount} />
+      </div>
     </>
   );
 }
