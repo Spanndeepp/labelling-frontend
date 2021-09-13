@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { removeUserSession } from "../../Utils/Common";
-import Filelist from "./Filelist";
+// import Filelist from "./Filelist";
 import ImageShow from "./ImageShow";
+import "./Labeller.css";
 
 function Labeller(props) {
   // console.log(props.location.state);
@@ -30,14 +31,30 @@ function Labeller(props) {
 
   return (
     <>
-      <div>Hello Labeller</div>
-      <div>Count - {user.obj_submitted}</div>
-      <input type="button" onClick={handleLogout} value="Logout" />
+      <div className="labeller-info">
+        Hello Labeller <span className="bold-text">Name</span>
+        <input
+          type="button"
+          className="logout-button"
+          onClick={handleLogout}
+          value="Logout"
+        />
+        <p className="object-data">
+          Object Assigned -&nbsp;
+          <span className="bold-text">
+            {user ? user.obj_assigned : "something"}
+          </span>
+        </p>
+        <p className="object-data">
+          Objects Submitted -&nbsp;
+          <span className="bold-text">{user ? user.obj_submitted : 0}</span>
+        </p>
+      </div>
       <br />
       <br />
       <br />
       <input type="file" onChange={handleSelect} accept="image/*" multiple />
-      <Filelist selectedFiles={sendFiles} />
+      {/* <Filelist selectedFiles={sendFiles} /> */}
       <ImageShow selectedFiles={sendFiles} initialCount={initialCount} />
     </>
   );

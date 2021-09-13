@@ -35,8 +35,18 @@ function ImageShow({ selectedFiles, initialCount }) {
     return () => {};
   }, [selectedFiles, state.count]);
 
+  const fileNames = [];
+
+  for (let i = 0; i < selectedFiles.length; i++) {
+    fileNames.push(<div key={i}>{selectedFiles[i].name}</div>);
+  }
+
   return (
     <>
+      <div>
+        {fileNames}
+        <br />
+      </div>
       <div>
         <input
           type="button"

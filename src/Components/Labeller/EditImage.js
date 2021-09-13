@@ -38,8 +38,8 @@ const EditImage = ({ currImage, edit }) => {
     let data = {
       x: xyval.xval / image.current.clientWidth,
       y: xyval.yval / image.current.clientHeight,
-      w: rectw,
-      h: recth,
+      w: rectw / image.current.clientWidth,
+      h: recth / image.current.clientHeight,
     };
     console.log(data);
     setArray([...array, data]);
@@ -51,8 +51,8 @@ const EditImage = ({ currImage, edit }) => {
       return r.rect(
         item.x * image.current.clientWidth,
         item.y * image.current.clientHeight,
-        item.w,
-        item.h
+        item.w * image.current.clientWidth,
+        item.h * image.current.clientHeight
       );
     });
     r.rect(xyval.xval, xyval.yval, rectw, recth);
@@ -101,6 +101,19 @@ const EditImage = ({ currImage, edit }) => {
 
   return (
     <div>
+      {edit && (
+        <canvas
+          className="canvas-img"
+          ref={canvas}
+          onMouseMove={(e) => {
+            moveRect(r)(e);
+          }}
+          onMouseDown={(e) => init(e)}
+          onMouseUp={(e) => {
+            endit(e);
+          }}
+        />
+      )}
       <img
         className="labelling-img"
         src={currImage}
@@ -108,17 +121,6 @@ const EditImage = ({ currImage, edit }) => {
         onLoad={onImageLoad}
         alt="Phone"
         width="400px"
-      />
-      <canvas
-        className="canvas"
-        ref={canvas}
-        onMouseMove={(e) => {
-          moveRect(r)(e);
-        }}
-        onMouseDown={(e) => init(e)}
-        onMouseUp={(e) => {
-          endit(e);
-        }}
       />
     </div>
   );

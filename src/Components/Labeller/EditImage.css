@@ -1,6 +1,9 @@
-canvas {
+.canvas-img {
   z-index: 0;
   position: absolute;
-  margin-left: -440px;
-  margin-top: 40px;
+  margin: 40px;
+}
+
+.labelling-img {
+  margin: 40px;
 }
