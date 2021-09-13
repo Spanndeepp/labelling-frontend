@@ -31,12 +31,30 @@ function ImageShow({ selectedFiles, initialCount }) {
     count < selectedFiles.length && selectedFiles.length && count >= 0
       ? setCurrImage(URL.createObjectURL(selectedFiles[count]))
       : setCurrImage(null);
+    console.log(count, "count");
+    if (count >= 0) {
+      document.getElementById(`file-${count}`).classList.add("active-file");
+      if (count + 1 < selectedFiles.length) {
+        document
+          .getElementById(`file-${count + 1}`)
+          .classList.remove("active-file");
+      }
+      if (count - 1 >= 0) {
+        document
+          .getElementById(`file-${count - 1}`)
+          .classList.remove("active-file");
+      }
+    }
   }, [selectedFiles, count]);
   console.log("Hello", array);
   const fileNames = [];
 
   for (let i = 0; i < selectedFiles.length; i++) {
-    fileNames.push(<div key={i}>{selectedFiles[i].name}</div>);
+    fileNames.push(
+      <aside className="single-file" id={`file-${i}`} key={i}>
+        {selectedFiles[i].name}
+      </aside>
+    );
   }
 
   const handleUpload = () => {
@@ -86,11 +104,17 @@ function ImageShow({ selectedFiles, initialCount }) {
           value="Upload Image"
         />
       )}
-      <div>
-        <div>{fileNames}</div>
-        {currImage && (
-          <EditImage currImage={currImage} array={array} setArray={setArray} />
-        )}
+      <div className="files-images">
+        <div className="file-names">{fileNames}</div>
+        <div className="edit-image">
+          {currImage && (
+            <EditImage
+              currImage={currImage}
+              array={array}
+              setArray={setArray}
+            />
+          )}
+        </div>
       </div>
     </>
   );

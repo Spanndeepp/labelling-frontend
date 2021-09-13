@@ -40,3 +40,32 @@
 .upload-button:hover {
   background: #0e2b6d;
 }
+
+.files-images {
+  display: flex;
+}
+
+.file-names {
+  margin: 10px;
+  max-height: 350px;
+  overflow-y: auto;
+  width: 250px;
+  border-top: 1px solid #0e2b6d;
+  border-bottom: 1px solid #0e2b6d;
+}
+
+.edit-image {
+  flex: 2;
+}
+
+.single-file {
+  border-bottom: 1px solid #0e2b6d;
+  border-left: 1px solid #0e2b6d;
+  padding: 2px 5px;
+}
+
+.active-file {
+  background: #0e2b6d;
+  font-weight: bold;
+  color: #fff;
+}
