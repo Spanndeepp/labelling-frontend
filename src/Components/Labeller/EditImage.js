@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./EditImage.css";
 
-const EditImage = ({ currImage }) => {
+const EditImage = ({ currImage, array, setArray }) => {
+  // console.log(currImage);
+
   let ctx = null;
   const canvas = useRef();
   const image = useRef();
   const [xyval, setXY] = useState({ xval: 0, yval: 0 });
 
   const [r, setR] = useState(null);
-  const [array, setArray] = useState([]);
-  console.log(array);
+  // const [array, setArray] = useState([]);
+  // console.log(array);
 
   const [draw, setDraw] = useState(false);
   const onImageLoad = () => {
@@ -20,13 +22,28 @@ const EditImage = ({ currImage }) => {
     canvasEle.height = imageEle.clientHeight;
     // console.log(canvasEle, imageEle);
     ctx = canvasEle.getContext("2d");
-    console.log(ctx);
+    // console.log(ctx);
 
     setR(ctx);
   };
 
+  // useEffect(() => {
+  //   canvas.current.addEventListener("keydown", handleKeyDown);
+  // }, []);
+
+  // const handleKeyDown = (event) => {
+  //   if (event.ctrlKey && (event.key === "Z" || event.key === "z")) {
+  //     if (array.length !== 0) {
+  //       console.log(true);
+  //       console.log("Hello", array.splice(array.length - 1));
+  //       return array.splice(array.length - 1);
+  //     }
+  //   }
+  // };
+
   useEffect(() => {
     setArray([]);
+    //eslint-disable-next-line
   }, [currImage]);
 
   const drawRect = (e, style = {}) => {
@@ -41,7 +58,7 @@ const EditImage = ({ currImage }) => {
       w: rectw / image.current.clientWidth,
       h: recth / image.current.clientHeight,
     };
-    console.log(data);
+    // console.log(data);
     setArray([...array, data]);
 
     r.strokeStyle = borderColor;
@@ -79,7 +96,7 @@ const EditImage = ({ currImage }) => {
         r.beginPath();
 
         r.rect(xyval.xval, xyval.yval, rectw, recth);
-        console.log(xyval.xval, xyval.yval, rectw, recth);
+        // console.log(xyval.xval, xyval.yval, rectw, recth);
         r.stroke();
       }
     };
@@ -103,6 +120,7 @@ const EditImage = ({ currImage }) => {
     <div className="image-area">
       <canvas
         className="canvas-img"
+        tabIndex="0"
         ref={canvas}
         onMouseMove={(e) => {
           moveRect(r)(e);
@@ -118,7 +136,6 @@ const EditImage = ({ currImage }) => {
         ref={image}
         onLoad={onImageLoad}
         alt="Phone"
-        width="400px"
       />
     </div>
   );

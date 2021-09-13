@@ -20,3 +20,23 @@
   display: flex;
   flex-direction: column;
 }
+
+.previous-button {
+  margin-left: 200px;
+}
+
+.upload-button {
+  background: #fa6b2b;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  position: absolute;
+  margin-top: 5px;
+  font-weight: bold;
+  right: 20px;
+}
+
+.upload-button:hover {
+  background: #0e2b6d;
+}

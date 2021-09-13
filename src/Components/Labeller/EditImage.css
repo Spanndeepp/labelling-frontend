@@ -2,7 +2,7 @@
   z-index: 0;
   position: absolute;
   margin: 40px;
-  width: 750px;
+  /* max-width: 1000px; */
 }
 
 .canvas-img:hover {
@@ -11,8 +11,8 @@
 
 .labelling-img {
   margin: 40px;
-  width: 750px;
-  height: auto;
+  max-width: 1000px;
+  /* height: auto; */
 }
 
 .image-area {
