@@ -50,8 +50,8 @@
   max-height: 350px;
   overflow-y: auto;
   width: 250px;
+  box-sizing: border-box;
   border-top: 1px solid #0e2b6d;
-  border-bottom: 1px solid #0e2b6d;
 }
 
 .edit-image {
@@ -61,6 +61,7 @@
 .single-file {
   border-bottom: 1px solid #0e2b6d;
   border-left: 1px solid #0e2b6d;
+  border-right: 1px solid #0e2b6d;
   padding: 2px 5px;
 }
 

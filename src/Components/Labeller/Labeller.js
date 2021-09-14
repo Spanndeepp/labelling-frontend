@@ -55,7 +55,7 @@ function Labeller(props) {
           type="file"
           className="choose-files-button"
           onChange={handleSelect}
-          accept="image/*"
+          accept="image/png, image/jpg, image/jpeg"
           multiple
         />
         {/* <Filelist selectedFiles={sendFiles} /> */}
