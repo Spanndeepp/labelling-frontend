@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { removeUserSession } from "../../Utils/Common";
-// import Filelist from "./Filelist";
+import { getUser, removeUserSession } from "../../Utils/Common";
+import axios from "axios";
 import ImageShow from "./ImageShow";
 import "./Labeller.css";
 
 function Labeller(props) {
-  // console.log(props.location.state);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [sendFiles, setSendFiles] = useState([]);
   const [initialCount, setInitialCount] = useState(0);
+  const [user, setUser] = useState({
+    email: "",
+    name: "",
+    obj_assigned: "",
+    obj_submitted: "",
+    phone: "",
+  });
 
-  let user;
-  if (props.location.state !== undefined && props.location.state !== null) {
-    user = props.location.state.user;
-    // console.log(user);
+  const email = getUser();
+  if (!email) {
+    alert("Login Again!!!");
+    removeUserSession();
+    props.history.push("/login");
   }
+
   const handleLogout = () => {
     removeUserSession();
     props.history.push("/login");
@@ -25,6 +33,22 @@ function Labeller(props) {
   };
 
   useEffect(() => {
+    axios
+      .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
+        email,
+      })
+      .then((res) => {
+        // console.log(res.data);
+        setUser(res.data.labeller);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return () => {};
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     setSendFiles(selectedFiles);
     setInitialCount(0);
   }, [selectedFiles]);
@@ -32,7 +56,7 @@ function Labeller(props) {
   return (
     <>
       <div className="labeller-info">
-        Hello Labeller <span className="bold-text">Name</span>
+        Hello Labeller <span className="bold-text">{user.name}</span>
         <input
           type="button"
           className="logout-button style-button"
