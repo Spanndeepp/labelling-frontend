@@ -2,12 +2,20 @@ import React, { useEffect, useState } from "react";
 import { getUser, removeUserSession } from "../../Utils/Common";
 import axios from "axios";
 import ImageShow from "./ImageShow";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import "./Labeller.css";
+
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 function Labeller(props) {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [sendFiles, setSendFiles] = useState([]);
   const [initialCount, setInitialCount] = useState(0);
+  const [error, setError] = useState("");
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [user, setUser] = useState({
     email: "",
     name: "",
@@ -33,16 +41,19 @@ function Labeller(props) {
   };
 
   useEffect(() => {
+    setError("");
     axios
       .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
         email,
       })
       .then((res) => {
-        // console.log(res.data);
         setUser(res.data.labeller);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status === 402)
+          setError("User not found with given email");
+        else setError("Something went wrong...😢");
+        setSnackBarOpen(true);
       });
     return () => {};
     //eslint-disable-next-line
@@ -52,6 +63,14 @@ function Labeller(props) {
     setSendFiles(selectedFiles);
     setInitialCount(0);
   }, [selectedFiles]);
+
+  const handleClose = (reason) => {
+    if (reason === "clickaway") return;
+    setSnackBarOpen(false);
+  };
+
+  var vertical = "top";
+  var horizontal = "center";
 
   return (
     <>
@@ -79,11 +98,26 @@ function Labeller(props) {
           type="file"
           className="choose-files-button"
           onChange={handleSelect}
-          accept="image/png, image/jpg, image/jpeg"
+          accept="image/jpg"
           multiple
         />
         {/* <Filelist selectedFiles={sendFiles} /> */}
         <ImageShow selectedFiles={sendFiles} initialCount={initialCount} />
+        {error && (
+          <>
+            <Snackbar
+              className="snackbar-reg"
+              open={snackBarOpen}
+              autoHideDuration={5000}
+              onClose={handleClose}
+              anchorOrigin={{ vertical, horizontal }}
+            >
+              <Alert onClose={handleClose} severity="error">
+                {error}
+              </Alert>
+            </Snackbar>
+          </>
+        )}
       </div>
     </>
   );

@@ -47,7 +47,7 @@ function ImageShow({ selectedFiles, initialCount }) {
     }
     //eslint-disable-next-line
   }, [selectedFiles, count]);
-  console.log("Hello", count, prevCount);
+  // console.log("Hello", count, prevCount);
   const fileNames = [];
 
   for (let i = 0; i < selectedFiles.length; i++) {
@@ -74,7 +74,7 @@ function ImageShow({ selectedFiles, initialCount }) {
       })
       .catch((err) => {
         console.log(err.response);
-        setError("Images accepted are .png, .jpg and .jpeg only...");
+        setError("Images type accepted is.jpg only...");
       });
     setSnackBarOpen(true);
   };
