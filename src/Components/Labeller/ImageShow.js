@@ -22,8 +22,10 @@ function ImageShow({ selectedFiles, initialCount }) {
 
   useEffect(() => {
     uploaded.current = new Array(selectedFiles.length).fill(false);
-    console.log(uploaded.current);
+    // console.log(uploaded.current);
   }, [selectedFiles]);
+
+  // console.log(selectedFiles[count]);
 
   useEffect(() => {
     count < selectedFiles.length && selectedFiles.length && count >= 0
@@ -59,8 +61,25 @@ function ImageShow({ selectedFiles, initialCount }) {
   }
 
   const handleUpload = () => {
+    let resultArr = [];
+    array.map((a) => resultArr.push(Object.values(a)));
+    const blob = new Blob([JSON.stringify(resultArr)], {
+      type: "text/plain",
+    });
+    // const element = document.createElement("a");
+    // element.href = URL.createObjectURL(file);
+    // element.download = "myFile.txt";
+    // document.body.appendChild(element); // Required for this to work in FireFox
+    // element.click();
+    const file = new File(
+      [blob],
+      selectedFiles[count].name.replace("jpg", "txt"),
+      { type: "text/plain" }
+    );
     const formData = new FormData();
     formData.append("image", selectedFiles[count]);
+    formData.append("text", file);
+
     setSuccess("");
     setError("");
     axios
@@ -73,8 +92,8 @@ function ImageShow({ selectedFiles, initialCount }) {
         uploaded.current[count] = true;
       })
       .catch((err) => {
-        console.log(err.response);
-        setError("Images type accepted is.jpg only...");
+        // console.log(err.response);
+        setError("Images type accepted is .jpg only...");
       });
     setSnackBarOpen(true);
   };
@@ -86,6 +105,10 @@ function ImageShow({ selectedFiles, initialCount }) {
 
   var vertical = "top";
   var horizontal = "center";
+
+  // const TextFile = () => {
+
+  // };
 
   return (
     <>
@@ -127,6 +150,9 @@ function ImageShow({ selectedFiles, initialCount }) {
           value="Upload Image"
         />
       )}
+      {/* {currImage && (
+        <input type="button" onClick={TextFile} value="Get Text File" />
+      )} */}
       {selectedFiles.length ? (
         <div className="files-images">
           <div className="file-names">{fileNames}</div>
