@@ -85,7 +85,7 @@ function Manager(props) {
             </Snackbar>
           </>
         )}
-        Hello Manager <span className="bold-text">{user.name}</span>
+        Welcome Manager <span className="bold-text">{user.name}</span>
         <input
           type="button"
           className="logout-button style-button"

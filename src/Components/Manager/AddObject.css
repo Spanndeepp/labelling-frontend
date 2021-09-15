@@ -1,0 +1,23 @@
+.add-object {
+  text-align: center;
+}
+
+.enter-object {
+  margin-top: 40px;
+}
+
+.add-object-button {
+  margin-left: 40px;
+  font-size: 17px;
+  background-color: #fa6b2b;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 15px;
+}
+
+.add-object-button:hover {
+  background-color: #0e2b6d;
+  border-radius: 8px;
+}
