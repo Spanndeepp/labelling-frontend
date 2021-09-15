@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
-import EditImage from "./EditImage";
+import EditImage from "../EditImage/EditImage";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import DoneIcon from "@material-ui/icons/Done";

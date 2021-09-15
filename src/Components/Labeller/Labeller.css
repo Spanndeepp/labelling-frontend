@@ -39,6 +39,19 @@
   margin-left: 10px;
 }
 
-/* .file-controls {
-  display: flex;
-} */
+.complete-button {
+  background-color: #106d2f;
+  color: #fff;
+  margin-left: 300px;
+  font-size: 17px;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 4px 10px;
+  box-shadow: 2px 4px 4px #cdcdcd;
+  margin-bottom: 10px;
+}
+
+.complete-button:hover {
+  background-color: #0d4b21;
+}

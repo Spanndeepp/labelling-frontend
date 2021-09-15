@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getUser, removeUserSession } from "../../Utils/Common";
 import axios from "axios";
-import ImageShow from "./ImageShow";
+import ImageShow from "./ImageShow/ImageShow";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./Labeller.css";
@@ -36,6 +36,10 @@ function Labeller(props) {
     props.history.push("/login");
   };
 
+  const handleComplete = () => {
+    return 1;
+  };
+
   const handleSelect = (e) => {
     setSelectedFiles(e.target.files);
   };
@@ -55,6 +59,7 @@ function Labeller(props) {
         else setError("Something went wrong...😢");
         setSnackBarOpen(true);
       });
+
     return () => {};
     //eslint-disable-next-line
   }, []);
@@ -76,6 +81,14 @@ function Labeller(props) {
     <>
       <div className="labeller-info">
         Hello Labeller <span className="bold-text">{user.name}</span>
+        {user.obj_submitted >= 200 ? (
+          <input
+            type="button"
+            onClick={handleComplete}
+            className="complete-button"
+            value="Complete"
+          />
+        ) : null}
         <input
           type="button"
           className="logout-button style-button"
