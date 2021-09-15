@@ -40,7 +40,7 @@ const App = () => {
         },
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setUserSession(userType, response.data.token, response.data.user);
         setAuthLoading(false);
       })
