@@ -22,6 +22,7 @@ function Labeller(props) {
     obj_assigned: "",
     obj_submitted: "",
     phone: "",
+    images: [],
   });
 
   const email = getUser();
@@ -44,6 +45,8 @@ function Labeller(props) {
     setSelectedFiles(e.target.files);
   };
 
+  const [imagesUploaded, setImagesUploaded] = useState(0);
+
   useEffect(() => {
     setError("");
     axios
@@ -52,6 +55,8 @@ function Labeller(props) {
       })
       .then((res) => {
         setUser(res.data.labeller);
+        setImagesUploaded(user.images.length);
+        // console.log(res.data.labeller);
       })
       .catch((err) => {
         if (err.response.status === 402)
@@ -61,8 +66,9 @@ function Labeller(props) {
       });
 
     return () => {};
-    //eslint-disable-next-line
-  }, []);
+  }, [user.images.length, email]);
+
+  console.log(imagesUploaded);
 
   useEffect(() => {
     setSendFiles(selectedFiles);
@@ -81,7 +87,7 @@ function Labeller(props) {
     <>
       <div className="labeller-info">
         Hello Labeller <span className="bold-text">{user.name}</span>
-        {user.obj_submitted >= 200 ? (
+        {user.images.length >= 200 ? (
           <input
             type="button"
             onClick={handleComplete}
@@ -97,13 +103,13 @@ function Labeller(props) {
         />
         <p className="object-data">
           Object Assigned -&nbsp;
-          <span className="bold-text">
-            {user ? user.obj_assigned : "something"}
-          </span>
+          <span className="bold-text">{user ? user.obj_assigned : ""}</span>
         </p>
         <p className="object-data">
           Objects Submitted -&nbsp;
-          <span className="bold-text">{user ? user.obj_submitted : 0}</span>
+          <span className="bold-text">
+            {user ? Math.max(user.images.length, imagesUploaded) : 0}
+          </span>
         </p>
       </div>
       <div className="file-controls">
@@ -111,11 +117,17 @@ function Labeller(props) {
           type="file"
           className="choose-files-button"
           onChange={handleSelect}
-          accept="image/jpg"
+          accept=".jpg"
           multiple
         />
         {/* <Filelist selectedFiles={sendFiles} /> */}
-        <ImageShow selectedFiles={sendFiles} initialCount={initialCount} />
+        <ImageShow
+          selectedFiles={sendFiles}
+          initialCount={initialCount}
+          email={user.email}
+          obj_assigned={user.obj_assigned}
+          setImagesUploaded={setImagesUploaded}
+        />
         {error && (
           <>
             <Snackbar

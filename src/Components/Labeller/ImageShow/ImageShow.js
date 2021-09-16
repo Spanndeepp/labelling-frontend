@@ -10,7 +10,13 @@ const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
-function ImageShow({ selectedFiles, initialCount }) {
+function ImageShow({
+  selectedFiles,
+  initialCount,
+  email,
+  obj_assigned,
+  setImagesUploaded,
+}) {
   const [currImage, setCurrImage] = useState(selectedFiles[initialCount]);
   const [count, setCount] = useState(initialCount);
   const [prevCount, setPrevCount] = useState(initialCount);
@@ -77,6 +83,8 @@ function ImageShow({ selectedFiles, initialCount }) {
       { type: "text/plain" }
     );
     const formData = new FormData();
+    formData.append("email", email);
+    formData.append("obj_assigned", obj_assigned);
     formData.append("image", selectedFiles[count]);
     formData.append("text", file);
 
@@ -84,16 +92,18 @@ function ImageShow({ selectedFiles, initialCount }) {
     setError("");
     axios
       .post(
-        "https://labelling-backend.herokuapp.com/api/upload/uploadImage",
+        "https://labelling-backend.herokuapp.com/api/upload/object",
         formData
       )
       .then((res) => {
-        setSuccess("Image Uploaded");
+        setSuccess("Object Uploaded");
         uploaded.current[count] = true;
+        setImagesUploaded((prevImagesUploaded) => prevImagesUploaded + 1);
       })
       .catch((err) => {
-        // console.log(err.response);
-        setError("Images type accepted is .jpg only...");
+        if (error.response.status === 500)
+          setError("Images type accepted is .jpg only...");
+        else setError("Something went wrong...");
       });
     setSnackBarOpen(true);
   };
