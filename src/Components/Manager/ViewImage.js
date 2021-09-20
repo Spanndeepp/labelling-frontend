@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import "./ViewImage.css";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
 const ViewImage = () => {
+  const [email, setEmail] = useState("");
   const [labeller, setLabeller] = useState({});
   const [error, setError] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
@@ -48,6 +50,10 @@ const ViewImage = () => {
     openFile();
   }, [openFile]);
 
+  const inputObject = (e) => {
+    setEmail(e.target.value);
+  };
+
   const handleClose = (reason) => {
     if (reason === "clickaway") return;
     setSnackBarOpen(false);
@@ -57,9 +63,15 @@ const ViewImage = () => {
   var horizontal = "center";
 
   return (
-    <div>
-      <h1>View Image Page</h1>
-      <p>View Image</p>
+    <div className="add-object">
+      <input
+        type="text"
+        className="input-object"
+        placeholder="Enter Object Name"
+        name="email"
+        onChange={inputObject}
+      />
+      <input type="button" className="get-objects" value="Get Images" />
       {error && (
         <>
           <Snackbar
