@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import axios from "axios";
 import "./ShowObj.css";
+import ObjTable from "./ObjTable";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -11,6 +11,7 @@ const Alert = (props) => {
 
 const ShowObj = () => {
   const [rows, setRows] = useState([]);
+  const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
 
@@ -29,6 +30,18 @@ const ShowObj = () => {
     //eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    setData(rows);
+  }, [rows]);
+
+  const handleFilter = (e) => {
+    setData(rows.filter((d) => d.status === e.target.value));
+  };
+
+  const resetFilter = () => {
+    setData(rows);
+  };
+
   const handleClose = (reason) => {
     if (reason === "clickaway") return;
     setSnackBarOpen(false);
@@ -40,7 +53,22 @@ const ShowObj = () => {
   return (
     <div className="add-object">
       <h1>Show Objects</h1>
-
+      <div className="filter-criteria">
+        <span className="filter-label">Filter According to:</span>
+        {rows && (
+          <select className="filter-dropdown" onChange={handleFilter}>
+            <option value="Assigned">Assigned</option>
+            <option value="Unassigned">UnAssigned</option>
+            <option value="Completed">Completed</option>
+          </select>
+        )}
+        <input
+          type="button"
+          value="Reset Filters"
+          className="reset-filter-button"
+          onClick={resetFilter}
+        />
+      </div>
       {error ? (
         <>
           <Snackbar
@@ -56,28 +84,7 @@ const ShowObj = () => {
           </Snackbar>
         </>
       ) : (
-        <div className="table-container">
-          <Table responsive striped bordered hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Object Name</th>
-                <th>Assigned To</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r, i) => (
-                <tr>
-                  <td>{i + 1}</td>
-                  <td>{r.objectName}</td>
-                  <td>{r.assignedTo}</td>
-                  <td>{r.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+        <ObjTable data={data} />
       )}
     </div>
   );

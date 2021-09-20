@@ -1,5 +1,38 @@
 .table-container {
   max-width: 800px;
   margin: 20px auto;
-  font-size: 17px;
+  font-size: 16px;
+}
+
+.filter-criteria {
+  font-size: 16px;
+}
+
+.filter-label {
+  margin-right: 20px;
+}
+
+.filter-dropdown {
+  padding: 3px 0;
+  border-radius: 4px;
+}
+
+.reset-filter-button {
+  margin-left: 20px;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  background-color: #0f5bbe;
+  font-weight: bold;
+  padding: 4px 10px;
+  font-size: 16px;
+}
+
+.reset-filter-button:hover {
+  background-color: #0f4894;
+}
+
+.reset-filter-button:focus {
+  border: 2px slategray double;
+  padding: 2px 8px;
 }

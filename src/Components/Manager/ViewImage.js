@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { FileCopyOutlined } from "@material-ui/icons";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -15,16 +14,15 @@ const ViewImage = () => {
 
   const openFile = useCallback(() => {
     if (labeller.images) {
-      let file = labeller.images[0].replace(".jpg", ".txt");
+      let file = labeller.images[1].replace(".jpg", ".txt");
       console.log(file);
       axios
-        .get(FileCopyOutlined)
+        .get(file)
         .then((response) => {
-          response.text();
-          console.log(response, response.text());
+          console.log(response.data);
         })
-        .then((data) => {
-          console.log(data);
+        .catch((error) => {
+          console.log(error.response);
         });
     }
     //labeller.images
@@ -38,6 +36,7 @@ const ViewImage = () => {
         email: "adityakhandelwal4201@gmail.com",
       })
       .then((res) => {
+        console.log(res.data);
         setLabeller(res.data.labeller);
       })
       .catch((err) => {
