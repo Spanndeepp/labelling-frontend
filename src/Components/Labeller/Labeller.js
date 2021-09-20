@@ -68,7 +68,7 @@ function Labeller(props) {
     return () => {};
   }, [user.images.length, email]);
 
-  console.log(imagesUploaded);
+  // console.log(imagesUploaded);
 
   useEffect(() => {
     setSendFiles(selectedFiles);

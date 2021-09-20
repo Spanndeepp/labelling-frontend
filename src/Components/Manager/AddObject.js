@@ -29,6 +29,7 @@ const AddObject = () => {
         setSuccess("Object Added✌👍");
       })
       .catch((err) => {
+        console.log(err.response);
         if (err.response.status === 402) setError("Object already exists!!");
         else setError("Something went wrong😢...Please try again later!!");
       });

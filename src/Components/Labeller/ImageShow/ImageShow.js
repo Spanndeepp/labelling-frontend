@@ -67,9 +67,13 @@ function ImageShow({
   }
 
   const handleUpload = () => {
-    let resultArr = [];
-    array.map((a) => resultArr.push(Object.values(a)));
-    const blob = new Blob([JSON.stringify(resultArr)], {
+    let resultArr = "";
+    array.map((a) => {
+      return (resultArr +=
+        "0 " + a.x + " " + a.y + " " + a.w + " " + a.h + "\n");
+    });
+    // console.log(resultArr);
+    const blob = new Blob([resultArr], {
       type: "text/plain",
     });
     // const element = document.createElement("a");
