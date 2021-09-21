@@ -63,8 +63,10 @@ const ImageControls = () => {
         objectName: object,
       })
       .then((res) => {
-        if (res.data.images.length === 0) setError("No images uploaded yet");
-        else setImages(res.data.images);
+        if (res.data.images.length === 0) {
+          setImages([]);
+          setError("No images uploaded yet");
+        } else setImages(res.data.images);
       })
       .catch((err) => {
         if (err.response.status === 402) setError("Object not found");
@@ -72,6 +74,39 @@ const ImageControls = () => {
       });
     setSnackBarOpen(true);
   };
+
+  useEffect(() => {
+    // count < images.length && images.length && count >= 0
+    //   ? setCurrImage(URL.createObjectURL(images[count]))
+    //   : setCurrImage(images[initialCount]);
+    // console.log(count, "count", images);
+    if (images.length > 0) {
+      if (images.length === 1) {
+        setCount(0);
+        document.getElementById("file-0").classList.add("active-file");
+        // setCurrImage(URL.createObjectURL(images[0]));
+      } else if (
+        document.getElementById(`file-${count}`) !== null &&
+        document.getElementById(`file-${prevCount}`) !== null
+      ) {
+        document.getElementById(`file-${count}`).classList.add("active-file");
+        document
+          .getElementById(`file-${prevCount}`)
+          .classList.remove("active-file");
+      }
+    }
+    //eslint-disable-next-line
+  }, [images, count]);
+
+  const img_names = images.map((row, i) => {
+    const rows = row.split("/");
+    return (
+      <aside className="single-file" id={`file-${i}`} key={i}>
+        {rows[rows.length - 1]}
+      </aside>
+    );
+  });
+  console.log(img_names);
 
   const handleClose = (reason) => {
     if (reason === "clickaway") return;
@@ -129,6 +164,20 @@ const ImageControls = () => {
             value="Reset"
           />
         </>
+      ) : null}
+      {images.length ? (
+        <div className="files-images">
+          <div className="file-names">{img_names}</div>
+          {/* <div className="edit-image">
+            {currImage && (
+              <EditImage
+                currImage={currImage}
+                array={array}
+                setArray={setArray}
+              />
+            )}
+          </div> */}
+        </div>
       ) : null}
       {error && (
         <>

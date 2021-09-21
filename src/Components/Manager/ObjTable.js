@@ -15,7 +15,7 @@ const ObjTable = ({ data }) => {
         </thead>
         <tbody>
           {data.map((r, i) => (
-            <tr>
+            <tr key={i}>
               <td>{i + 1}</td>
               <td>{r.objectName}</td>
               <td>{r.assignedTo ? r.assignedTo : "-"}</td>
