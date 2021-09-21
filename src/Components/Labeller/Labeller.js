@@ -38,7 +38,20 @@ function Labeller(props) {
   };
 
   const handleComplete = () => {
-    return 1;
+    axios
+      .post("https://labelling-backend.herokuapp.com/api/auth/completeObj", {
+        email,
+      })
+      .then((res) => {
+        setUser(res.data.labellerObj);
+        setImagesUploaded(user.images.length);
+      })
+      .catch((err) => {
+        if (err.response.status === 402)
+          setError("User not found with given email");
+        else setError("Something went wrong...😢");
+        setSnackBarOpen(true);
+      });
   };
 
   const handleSelect = (e) => {
@@ -49,6 +62,7 @@ function Labeller(props) {
 
   useEffect(() => {
     setError("");
+    console.log("UseEffect1");
     axios
       .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
         email,
@@ -66,7 +80,8 @@ function Labeller(props) {
       });
 
     return () => {};
-  }, [user.images.length, email]);
+    //eslint-disable-next-line
+  }, [imagesUploaded]);
 
   // console.log(imagesUploaded);
 
@@ -87,7 +102,7 @@ function Labeller(props) {
     <>
       <div className="labeller-info">
         Hello Labeller <span className="bold-text">{user.name}</span>
-        {user.images.length >= 200 ? (
+        {user.images.length >= 5 ? (
           <input
             type="button"
             onClick={handleComplete}
@@ -107,9 +122,7 @@ function Labeller(props) {
         </p>
         <p className="object-data">
           Objects Submitted -&nbsp;
-          <span className="bold-text">
-            {user ? Math.max(user.images.length, imagesUploaded) : 0}
-          </span>
+          <span className="bold-text">{user ? user.images.length : 0}</span>
         </p>
       </div>
       <div className="file-controls">
