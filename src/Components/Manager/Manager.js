@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import AddObject from "./AddObject";
 import "./Manager.css";
 import ShowObj from "./ShowObj";
-import ViewImage from "./ViewImage";
+import ImageControls from "./ImageControls";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -57,7 +57,7 @@ function Manager(props) {
 
   if (radioSelected === 0) button = <AddObject />;
   else if (radioSelected === 1) button = <ShowObj />;
-  else if (radioSelected === 2) button = <ViewImage />;
+  else if (radioSelected === 2) button = <ImageControls />;
 
   const handleClose = (reason) => {
     if (reason === "clickaway") return;
