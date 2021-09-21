@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./ImageControls.css";
+import ViewImage from "./ViewImage";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -15,23 +16,6 @@ const ImageControls = () => {
   const [prevCount, setPrevCount] = useState(0);
   const [error, setError] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
-
-  const openFile = useCallback(() => {
-    if (images.length) {
-      let file = images[1].replace(".jpg", ".txt");
-      console.log(file);
-      axios
-        .get(file)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    }
-    //labeller.images
-    //eslint-disable-next-line
-  }, []);
 
   // useEffect(() => {
   //   setError("");
@@ -84,7 +68,6 @@ const ImageControls = () => {
       if (images.length === 1) {
         setCount(0);
         document.getElementById("file-0").classList.add("active-file");
-        // setCurrImage(URL.createObjectURL(images[0]));
       } else if (
         document.getElementById(`file-${count}`) !== null &&
         document.getElementById(`file-${prevCount}`) !== null
@@ -106,7 +89,7 @@ const ImageControls = () => {
       </aside>
     );
   });
-  console.log(img_names);
+  // console.log(img_names);
 
   const handleClose = (reason) => {
     if (reason === "clickaway") return;
@@ -167,16 +150,10 @@ const ImageControls = () => {
       ) : null}
       {images.length ? (
         <div className="files-images">
-          <div className="file-names">{img_names}</div>
-          {/* <div className="edit-image">
-            {currImage && (
-              <EditImage
-                currImage={currImage}
-                array={array}
-                setArray={setArray}
-              />
-            )}
-          </div> */}
+          <div className="file-names file-margin">{img_names}</div>
+          <div className="edit-image">
+            <ViewImage currImage={images[count]} />
+          </div>
         </div>
       ) : null}
       {error && (
