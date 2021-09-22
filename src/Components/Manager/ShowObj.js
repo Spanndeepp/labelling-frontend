@@ -59,7 +59,9 @@ const ShowObj = () => {
           <select className="filter-dropdown" onChange={handleFilter}>
             <option value="Assigned">Assigned</option>
             <option value="Unassigned">UnAssigned</option>
-            <option value="Completed">Completed</option>
+            <option value="Labelled">Labelled</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
           </select>
         )}
         <input

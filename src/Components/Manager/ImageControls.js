@@ -16,6 +16,7 @@ const ImageControls = () => {
   const [prevCount, setPrevCount] = useState(0);
   const [error, setError] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [success, setSuccess] = useState("");
 
   // useEffect(() => {
   //   setError("");
@@ -60,10 +61,6 @@ const ImageControls = () => {
   };
 
   useEffect(() => {
-    // count < images.length && images.length && count >= 0
-    //   ? setCurrImage(URL.createObjectURL(images[count]))
-    //   : setCurrImage(images[initialCount]);
-    // console.log(count, "count", images);
     if (images.length > 0) {
       if (images.length === 1) {
         setCount(0);
@@ -90,6 +87,29 @@ const ImageControls = () => {
     );
   });
   // console.log(img_names);
+
+  const statusChange = (e) => {
+    setError("");
+    setSuccess("");
+    let status = "";
+    if (e.target.value === "Accept") status = "Accepted";
+    else if (e.target.value === "Reject") status = "Rejected";
+    axios
+      .post("https://labelling-backend.herokuapp.com/api/auth/changeStatus", {
+        object,
+        status,
+      })
+      .then((res) => {
+        setSuccess("Status Changed Successfully!!");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status === 402) setError(err.response.data.error);
+        else setError("Server isn't working");
+      });
+    setSnackBarOpen(true);
+  };
 
   const handleClose = (reason) => {
     if (reason === "clickaway") return;
@@ -146,6 +166,18 @@ const ImageControls = () => {
             disabled={count === 0}
             value="Reset"
           />
+          <input
+            type="button"
+            className="accept-button"
+            onClick={statusChange}
+            value="Accept"
+          />
+          <input
+            type="button"
+            className="reject-button"
+            onClick={statusChange}
+            value="Reject"
+          />
         </>
       ) : null}
       {images.length ? (
@@ -167,6 +199,21 @@ const ImageControls = () => {
           >
             <Alert onClose={handleClose} severity="error">
               {error}
+            </Alert>
+          </Snackbar>
+        </>
+      )}
+      {success && (
+        <>
+          <Snackbar
+            className="snackbar-reg"
+            open={snackBarOpen}
+            autoHideDuration={5000}
+            onClose={handleClose}
+            anchorOrigin={{ vertical, horizontal }}
+          >
+            <Alert onClose={handleClose} severity="success">
+              {success}
             </Alert>
           </Snackbar>
         </>
