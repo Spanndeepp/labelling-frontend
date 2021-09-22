@@ -3,7 +3,7 @@ import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./ImageControls.css";
-import ViewImage from "./ViewImage";
+import ViewImage from "../ViewImage/ViewImage";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

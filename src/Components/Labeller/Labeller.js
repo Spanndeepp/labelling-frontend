@@ -102,7 +102,7 @@ function Labeller(props) {
     <>
       <div className="labeller-info">
         Hello Labeller <span className="bold-text">{user.name}</span>
-        {user.images.length >= 5 ? (
+        {user.images.length >= 200 ? (
           <input
             type="button"
             onClick={handleComplete}

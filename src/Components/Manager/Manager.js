@@ -6,10 +6,10 @@ import MuiAlert from "@material-ui/lab/Alert";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import AddObject from "./AddObject";
+import AddObject from "./AddObject/AddObject";
 import "./Manager.css";
-import ShowObj from "./ShowObj";
-import ImageControls from "./ImageControls";
+import ShowObj from "./ShowObj/ShowObj";
+import ImageControls from "./ImageControls/ImageControls";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
