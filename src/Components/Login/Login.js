@@ -53,7 +53,7 @@ const Login = (props) => {
         if (error.response.status === 400)
           setError("Some of the fields are missing!!");
         else if (error.response.status === 401)
-          setError("Email address or password is incorrect");
+          setError(error.response.data.error);
         else setError("Something went wrong. Please try again later.");
       });
     return () => {};

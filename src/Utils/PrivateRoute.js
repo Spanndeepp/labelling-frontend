@@ -5,18 +5,20 @@ import { getToken } from "./Common";
 // handle the private routes
 function PrivateRoute({ component: Component, ...rest }) {
   return (
-    <Route
-      {...rest}
-      render={(props) =>
-        getToken() ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    />
+    <>
+      <Route
+        {...rest}
+        render={(props) =>
+          getToken() ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{ pathname: "/login", state: { from: props.location } }}
+            />
+          )
+        }
+      />
+    </>
   );
 }
 

@@ -8,41 +8,50 @@ body {
 }
 
 .header {
-  padding: 20px;
-  border-bottom: 0px solid #0a0a0a;
-  background: #0a0a0a;
+  background-color: #0e2b6d;
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
+}
+
+.links {
+  padding: 10px;
+  margin-left: 500px;
+  font-weight: bold;
+  display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: flex-end;
   align-items: center;
 }
 
-.header a {
-  color: #0072ff;
+.links a {
+  color: #8f9bb7;
   text-decoration: none;
-  margin-left: 20px;
-  margin-right: 5px;
+  font-size: 16px;
+  /* margin-left: 20px; */
+  margin-right: 30px;
 }
 
-.header a:hover {
-  color: #8a0f53;
+.links a:hover {
+  color: #fff;
 }
 
-.header small {
-  color: #666;
-}
-
-.header .active {
-  color: #2c7613;
+.links .active {
+  color: #fff;
+  background: #fa6b2b;
+  padding: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 20px;
 }
 
 .content {
   padding: 0px;
 }
 
-.error {
-  color: red;
-  margin-bottom: 10px;
+.header-label {
+  color: #fff;
+  padding-top: 5px;
+  margin-left: 10px;
 }

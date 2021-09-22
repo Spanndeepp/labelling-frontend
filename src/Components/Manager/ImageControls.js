@@ -101,10 +101,10 @@ const ImageControls = () => {
       })
       .then((res) => {
         setSuccess("Status Changed Successfully!!");
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         if (err.response.status === 402) setError(err.response.data.error);
         else setError("Server isn't working");
       });

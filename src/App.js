@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, NavLink } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 import axios from "axios";
 import Login from "./Components/Login/Login";
 // import Dashboard from "./Components/Dashboard/Dashboard";
@@ -59,23 +59,9 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <div>
-          <div className="header">
-            <NavLink exact activeClassName="active" to="/">
-              Home
-            </NavLink>
-            <NavLink activeClassName="active" to="/login">
-              Login
-            </NavLink>
-            <NavLink activeClassName="active" to="/register">
-              Register
-            </NavLink>
-            <NavLink activeClassName="active" exact to="/dashboard">
-              Dashboard
-            </NavLink>
-          </div>
           <div className="content">
             <Switch>
-              <Route exact path="/" component={Home} />
+              <PublicRoute exact path="/" component={Home} />
               <PublicRoute path="/register" component={Register} />
               <PublicRoute path="/login" component={Login} />
               <PrivateRoute path="/dashboard" component={Dashboard} />
