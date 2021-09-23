@@ -47,8 +47,7 @@ function Labeller(props) {
         setImagesUploaded(user.images.length);
       })
       .catch((err) => {
-        if (err.response.status === 402)
-          setError("User not found with given email");
+        if (err.response.status === 401) setError(err.response.data.error);
         else setError("Something went wrong...😢");
         setSnackBarOpen(true);
       });
@@ -102,7 +101,7 @@ function Labeller(props) {
     <>
       <div className="labeller-info">
         Hello Labeller <span className="bold-text">{user.name}</span>
-        {user.images.length >= 200 ? (
+        {user.images.length >= 2 ? (
           <input
             type="button"
             onClick={handleComplete}
