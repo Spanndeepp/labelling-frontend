@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { HashRouter, Switch } from "react-router-dom";
 import axios from "axios";
 import Login from "./Components/Login/Login";
 // import Dashboard from "./Components/Dashboard/Dashboard";
@@ -57,7 +57,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <div>
           <div className="content">
             <Switch>
@@ -70,7 +70,7 @@ const App = () => {
             </Switch>
           </div>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };
