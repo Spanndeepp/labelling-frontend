@@ -22,6 +22,7 @@ function ImageShow({
   const [prevCount, setPrevCount] = useState(initialCount);
   const [array, setArray] = useState([]);
   const [error, setError] = useState("");
+  const [seq, setSeq] = useState(null);
   const uploaded = useRef([]);
   const [success, setSuccess] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
@@ -32,6 +33,24 @@ function ImageShow({
   }, [selectedFiles]);
 
   // console.log(selectedFiles[count]);
+
+  useEffect(() => {
+    setError("");
+    axios
+      .post("https://labelling-backend.herokuapp.com/api/auth/getOneObject", {
+        objectName: obj_assigned,
+      })
+      .then((res) => {
+        setSeq(res.data.object.seq);
+        console.log(res);
+      })
+      .catch((err) => {
+        setError(err.response.data.error);
+        console.log(err.response);
+      });
+    // setSnackBarOpen(true);
+    //eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     count < selectedFiles.length && selectedFiles.length && count >= 0
@@ -70,7 +89,7 @@ function ImageShow({
     let resultArr = "";
     array.map((a) => {
       return (resultArr +=
-        "0 " + a.x + " " + a.y + " " + a.w + " " + a.h + "\n");
+        seq + " " + a.x + " " + a.y + " " + a.w + " " + a.h + "\n");
     });
     // console.log(resultArr);
     const blob = new Blob([resultArr], {

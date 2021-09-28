@@ -39,9 +39,12 @@ function Labeller(props) {
 
   const handleComplete = () => {
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/completeObj", {
-        email,
-      })
+      .post(
+        "https://4000-teal-mollusk-2g2uqliv.ws-us18.gitpod.io/api/auth/completeObj",
+        {
+          email,
+        }
+      )
       .then((res) => {
         setUser(res.data.labellerObj);
         setImagesUploaded(user.images.length);
@@ -61,7 +64,7 @@ function Labeller(props) {
 
   useEffect(() => {
     setError("");
-    console.log("UseEffect1");
+    // console.log("UseEffect1");
     axios
       .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
         email,
@@ -101,7 +104,7 @@ function Labeller(props) {
     <>
       <div className="labeller-info">
         Hello Labeller <span className="bold-text">{user.name}</span>
-        {user.images.length >= 2 ? (
+        {user.images.length >= 200 ? (
           <input
             type="button"
             onClick={handleComplete}
