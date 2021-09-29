@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 import { setUserSession } from "../../Utils/Common";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
 import "./Login.css";
 
 function Alert(props) {
@@ -127,9 +127,9 @@ const Login = (props) => {
               />
             </div>
             <div id="registration-page">
-              <a href="/register">
+              <NavLink to="/register">
                 <h4>Not Registered? Click here to Register</h4>
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>

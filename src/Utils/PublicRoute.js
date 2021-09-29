@@ -6,9 +6,9 @@ import { getToken } from "./Common";
 // handle the public routes
 function PublicRoute({ component: Component, ...rest }) {
   useEffect(() => {
-    console.log(document.getElementsByClassName("links"), window.screen.width);
+    // console.log(document.getElementsByClassName("links"), screen.width);
     document.getElementsByClassName("links")[0].style.marginLeft =
-      window.screen.width - 202 - 325 + "px";
+      window.innerWidth - 202 - 320 + "px";
   }, []);
   return (
     <>
