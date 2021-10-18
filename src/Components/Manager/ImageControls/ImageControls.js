@@ -110,6 +110,52 @@ const ImageControls = () => {
       });
     setSnackBarOpen(true);
   };
+  const handleDownload = () => {
+    axios
+      .get(images[0], {
+        responseType: "blob",
+      })
+      .then((res) => {
+        console.log(res);
+      });
+    // var temporaryDownloadLink = document.createElement("a");
+    // temporaryDownloadLink.style.display = "none";
+    // document.body.appendChild(temporaryDownloadLink);
+    // for (let i = 0; i < images.length; i++) {
+    //   console.log(images[i]);
+    //   let imageFileArray = images[i].split("/");
+    //   let imageFile = imageFileArray[imageFileArray.length - 1];
+    //   var download = images[i];
+    //   temporaryDownloadLink.setAttribute("href", download);
+    //   temporaryDownloadLink.setAttribute("download", download);
+    //   temporaryDownloadLink.target="_blank";
+    //   temporaryDownloadLink.click();
+    //   let file = images[i].replace(".jpg", ".txt");
+    //   let textFile = imageFile.replace(".jpg", ".txt");
+    //   if (i === images.length - 1) {
+    //     clearInterval(interval);
+    //   }
+    // axios.get(file).then((res) => {
+    //   // const blob = res.blob();
+    //   console.log(res);
+    // });
+    // .then((blob) => {
+    //   // Create blob link to download
+    //   const url = window.URL.createObjectURL(new Blob([blob]));
+    //   const link = document.createElement("a");
+    //   link.href = url;
+    //   link.setAttribute("download", textFile);
+    //   // Append to html link element page
+    //   document.body.appendChild(link);
+    //   // Start download
+    //   link.click();
+    //   // Clean up and remove the link
+    //   link.parentNode.removeChild(link);
+    // });
+    // }
+  };
+
+  // let interval = setInterval(handleDownload, 300, images);
 
   const handleClose = (reason) => {
     if (reason === "clickaway") return;
@@ -165,6 +211,12 @@ const ImageControls = () => {
             }}
             disabled={count === 0}
             value="Reset"
+          />
+          <input
+            type="button"
+            className="download-button"
+            onClick={handleDownload}
+            value="Download"
           />
           <input
             type="button"

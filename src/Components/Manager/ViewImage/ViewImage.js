@@ -26,6 +26,7 @@ const ViewImage = ({ currImage }) => {
     axios
       .get(file)
       .then((response) => {
+        console.log("Res", response);
         const strArray = response.data.split(" ");
         for (let i = 1; i < strArray.length; i = i + 4)
           array.push({
@@ -57,7 +58,7 @@ const ViewImage = ({ currImage }) => {
         }
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log("Err", error.response);
       });
   };
 

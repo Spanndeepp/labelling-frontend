@@ -39,12 +39,9 @@ function Labeller(props) {
 
   const handleComplete = () => {
     axios
-      .post(
-        "https://4000-teal-mollusk-2g2uqliv.ws-us18.gitpod.io/api/auth/completeObj",
-        {
-          email,
-        }
-      )
+      .post("https://labelling-backend.herokuapp.com/api/auth/completeObj", {
+        email,
+      })
       .then((res) => {
         setUser(res.data.labellerObj);
         setImagesUploaded(user.images.length);
