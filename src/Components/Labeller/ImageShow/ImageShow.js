@@ -36,13 +36,13 @@ function ImageShow({
 
   useEffect(() => {
     setError("");
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getOneObject", {
+    obj_assigned && axios
+      .post("https://4000-teal-mollusk-2g2uqliv.ws-us18.gitpod.io/api/auth/getOneObject", {
         objectName: obj_assigned,
       })
       .then((res) => {
         setSeq(res.data.object.seq);
-        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
         setError(err.response.data.error);
@@ -50,7 +50,7 @@ function ImageShow({
       });
     // setSnackBarOpen(true);
     //eslint-disable-next-line
-  }, []);
+  }, [obj_assigned]);
 
   useEffect(() => {
     count < selectedFiles.length && selectedFiles.length && count >= 0
@@ -86,6 +86,7 @@ function ImageShow({
   }
 
   const handleUpload = () => {
+    console.log(seq);
     let resultArr = "";
     array.map((a) => {
       return (resultArr +=
