@@ -37,7 +37,7 @@ function ImageShow({
   useEffect(() => {
     setError("");
     obj_assigned && axios
-      .post("https://4000-teal-mollusk-2g2uqliv.ws-us18.gitpod.io/api/auth/getOneObject", {
+      .post("https://spanndeep-backend.herokuapp.com/api/auth/getOneObject", {
         objectName: obj_assigned,
       })
       .then((res) => {
