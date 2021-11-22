@@ -37,7 +37,7 @@ function ImageShow({
   useEffect(() => {
     setError("");
     obj_assigned && axios
-      .post("https://spanndeep-backend.herokuapp.com/api/auth/getOneObject", {
+      .post("https://labelling-backend.herokuapp.com/api/auth/getOneObject", {
         objectName: obj_assigned,
       })
       .then((res) => {
