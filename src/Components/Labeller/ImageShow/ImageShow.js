@@ -22,10 +22,10 @@ function ImageShow({
   const [prevCount, setPrevCount] = useState(initialCount);
   const [array, setArray] = useState([]);
   const [error, setError] = useState("");
-  const [seq, setSeq] = useState(null);
   const uploaded = useRef([]);
   const [success, setSuccess] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
+  // const [seq, setSeq] = useState(null);
 
   useEffect(() => {
     uploaded.current = new Array(selectedFiles.length).fill(false);
@@ -34,23 +34,23 @@ function ImageShow({
 
   // console.log(selectedFiles[count]);
 
-  useEffect(() => {
-    setError("");
-    obj_assigned && axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getOneObject", {
-        objectName: obj_assigned,
-      })
-      .then((res) => {
-        setSeq(res.data.object.seq);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        setError(err.response.data.error);
-        console.log(err.response);
-      });
-    // setSnackBarOpen(true);
-    //eslint-disable-next-line
-  }, [obj_assigned]);
+  // useEffect(() => {
+  //   setError("");
+  //   obj_assigned && axios
+  //     .post("https://labelling-backend.herokuapp.com/api/auth/getOneObject", {
+  //       objectName: obj_assigned,
+  //     })
+  //     .then((res) => {
+  //       setSeq(res.data.object.seq);
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       setError(err.response.data.error);
+  //       console.log(err.response);
+  //     });
+  //   // setSnackBarOpen(true);
+  //   //eslint-disable-next-line
+  // }, [obj_assigned]);
 
   useEffect(() => {
     count < selectedFiles.length && selectedFiles.length && count >= 0
@@ -86,11 +86,11 @@ function ImageShow({
   }
 
   const handleUpload = () => {
-    console.log(seq);
+    // console.log(seq);
     let resultArr = "";
     array.map((a) => {
       return (resultArr +=
-        seq + " " + a.x + " " + a.y + " " + a.w + " " + a.h + "\n");
+        0 + " " + a.x + " " + a.y + " " + a.w + " " + a.h + "\n");
     });
     // console.log(resultArr);
     const blob = new Blob([resultArr], {
