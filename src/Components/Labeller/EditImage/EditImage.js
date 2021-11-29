@@ -52,13 +52,16 @@ const EditImage = ({ currImage, array, setArray }) => {
     const { borderColor = "black", borderWidth = 2 } = style;
     r.clearRect(0, 0, image.current.clientWidth, image.current.clientHeight);
 
+    // console.log(xyval.xval, xyval.yval, rectw, recth);
+
     let data = {
-      x: xyval.xval / image.current.clientWidth,
-      y: xyval.yval / image.current.clientHeight,
+      x: (xyval.xval + rectw / 2) / image.current.clientWidth,
+      y: (xyval.yval + recth / 2) / image.current.clientHeight,
       w: rectw / image.current.clientWidth,
       h: recth / image.current.clientHeight,
     };
-    // console.log(data);
+
+    // console.log(array);
     setArray([...array, data]);
 
     r.strokeStyle = borderColor;
@@ -66,8 +69,8 @@ const EditImage = ({ currImage, array, setArray }) => {
     r.beginPath();
     array.map((item) => {
       return r.rect(
-        item.x * image.current.clientWidth,
-        item.y * image.current.clientHeight,
+        (item.x - item.w / 2) * image.current.clientWidth,
+        (item.y - item.h / 2) * image.current.clientHeight,
         item.w * image.current.clientWidth,
         item.h * image.current.clientHeight
       );

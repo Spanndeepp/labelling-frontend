@@ -48,8 +48,8 @@ const ViewImage = ({ currImage }) => {
             //   item.h * image.current.clientHeight
             // );
             return r.rect(
-              item.x * image.current.clientWidth,
-              item.y * image.current.clientHeight,
+              (item.x - item.w / 2) * image.current.clientWidth,
+              (item.y - item.h / 2) * image.current.clientHeight,
               item.w * image.current.clientWidth,
               item.h * image.current.clientHeight
             );
