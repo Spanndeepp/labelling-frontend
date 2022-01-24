@@ -52,6 +52,7 @@ const ImageControls = () => {
           setImages([]);
           setError("No images uploaded yet");
         } else setImages(res.data.images);
+        console.log(res.data);
       })
       .catch((err) => {
         if (err.response.status === 402) setError("Object not found");
@@ -121,7 +122,7 @@ const ImageControls = () => {
     var temporaryDownloadLink = document.createElement("a");
     temporaryDownloadLink.style.display = "none";
     document.body.appendChild(temporaryDownloadLink);
-    console.log(images[count]);
+    // console.log(images[count]);
     let imageFileArray = images[count].split("/");
     let imageFile = imageFileArray[imageFileArray.length - 1];
     var download = images[count];
@@ -136,7 +137,7 @@ const ImageControls = () => {
       .get(file)
       .then((res) => {
         // const blob = res.blob();
-        console.log(res);
+        // console.log(res);
       })
       .then((blob) => {
         // Create blob link to download
@@ -232,7 +233,12 @@ const ImageControls = () => {
       ) : null}
       {images.length ? (
         <div className="files-images">
-          <div className="file-names file-margin">{img_names}</div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div>
+              <strong>Total Images: {images.length} </strong>
+            </div>
+            <div className="file-names file-margin">{img_names}</div>
+          </div>
           <div className="edit-image">
             <ViewImage currImage={images[count]} />
           </div>
