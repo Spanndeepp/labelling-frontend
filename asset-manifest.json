@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/labelling-tool/static/css/main.a02e67aa.chunk.css",
-    "main.js": "/labelling-tool/static/js/main.ae73db40.chunk.js",
-    "main.js.map": "/labelling-tool/static/js/main.ae73db40.chunk.js.map",
-    "runtime-main.js": "/labelling-tool/static/js/runtime-main.8b40e707.js",
-    "runtime-main.js.map": "/labelling-tool/static/js/runtime-main.8b40e707.js.map",
-    "static/css/2.4d9d0d87.chunk.css": "/labelling-tool/static/css/2.4d9d0d87.chunk.css",
-    "static/js/2.dde93bfc.chunk.js": "/labelling-tool/static/js/2.dde93bfc.chunk.js",
-    "static/js/2.dde93bfc.chunk.js.map": "/labelling-tool/static/js/2.dde93bfc.chunk.js.map",
-    "index.html": "/labelling-tool/index.html",
-    "static/css/2.4d9d0d87.chunk.css.map": "/labelling-tool/static/css/2.4d9d0d87.chunk.css.map",
-    "static/css/main.a02e67aa.chunk.css.map": "/labelling-tool/static/css/main.a02e67aa.chunk.css.map",
-    "static/js/2.dde93bfc.chunk.js.LICENSE.txt": "/labelling-tool/static/js/2.dde93bfc.chunk.js.LICENSE.txt",
-    "static/media/ss.f3f23d4e.PNG": "/labelling-tool/static/media/ss.f3f23d4e.PNG"
+    "main.css": "/labelling-frontend/static/css/main.a02e67aa.chunk.css",
+    "main.js": "/labelling-frontend/static/js/main.ee006dbc.chunk.js",
+    "main.js.map": "/labelling-frontend/static/js/main.ee006dbc.chunk.js.map",
+    "runtime-main.js": "/labelling-frontend/static/js/runtime-main.ab147268.js",
+    "runtime-main.js.map": "/labelling-frontend/static/js/runtime-main.ab147268.js.map",
+    "static/css/2.4d9d0d87.chunk.css": "/labelling-frontend/static/css/2.4d9d0d87.chunk.css",
+    "static/js/2.724d3d74.chunk.js": "/labelling-frontend/static/js/2.724d3d74.chunk.js",
+    "static/js/2.724d3d74.chunk.js.map": "/labelling-frontend/static/js/2.724d3d74.chunk.js.map",
+    "index.html": "/labelling-frontend/index.html",
+    "static/css/2.4d9d0d87.chunk.css.map": "/labelling-frontend/static/css/2.4d9d0d87.chunk.css.map",
+    "static/css/main.a02e67aa.chunk.css.map": "/labelling-frontend/static/css/main.a02e67aa.chunk.css.map",
+    "static/js/2.724d3d74.chunk.js.LICENSE.txt": "/labelling-frontend/static/js/2.724d3d74.chunk.js.LICENSE.txt",
+    "static/media/ss.f3f23d4e.PNG": "/labelling-frontend/static/media/ss.f3f23d4e.PNG"
   },
   "entrypoints": [
-    "static/js/runtime-main.8b40e707.js",
+    "static/js/runtime-main.ab147268.js",
     "static/css/2.4d9d0d87.chunk.css",
-    "static/js/2.dde93bfc.chunk.js",
+    "static/js/2.724d3d74.chunk.js",
     "static/css/main.a02e67aa.chunk.css",
-    "static/js/main.ae73db40.chunk.js"
+    "static/js/main.ee006dbc.chunk.js"
   ]
 }
