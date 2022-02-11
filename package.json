@@ -1,6 +1,6 @@
 {
-  "name": "labelling-tool",
-  "homepage":"https://adityak4201.github.io/labelling-tool",
+  "name": "labelling-frontend",
+  "homepage":"https://spanndeepp.github.io/labelling-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
