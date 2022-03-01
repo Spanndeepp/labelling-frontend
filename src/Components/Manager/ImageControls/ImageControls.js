@@ -10,6 +10,7 @@ const Alert = (props) => {
 };
 
 const ImageControls = () => {
+  const [textFileName, setTextFileName] = useState("");
   const [object, setObject] = useState("");
   const [images, setImages] = useState([]);
   const [count, setCount] = useState(0);
@@ -38,6 +39,7 @@ const ImageControls = () => {
   // }, [openFile]);
 
   const inputObject = (e) => {
+    setTextFileName(e.target.value);
     setObject(e.target.value);
   };
 
@@ -60,6 +62,7 @@ const ImageControls = () => {
       });
     setSnackBarOpen(true);
   };
+  console.log(images, "hiiiii")
 
   useEffect(() => {
     if (images.length > 0) {
@@ -132,7 +135,9 @@ const ImageControls = () => {
     temporaryDownloadLink.click();
     let file = images[count].replace(".jpg", ".txt");
     let textFile = imageFile.replace(".jpg", ".txt");
-
+    // console.log("Download file : " + textFile);
+    // console.log("Download file : " + textFileName);
+    textFile = textFileName;
     axios
       .get(file)
       .then((res) => {
@@ -153,6 +158,46 @@ const ImageControls = () => {
         link.parentNode.removeChild(link);
       });
   };
+
+
+  // Handle Download All
+
+  const handleDownloadAll = () => {
+    var i;
+    for (i = 0; i < images.length; i++) {
+      var temporaryDownloadLink = document.createElement("a");
+      temporaryDownloadLink.style.display = "none";
+      document.body.appendChild(temporaryDownloadLink);
+      let imageFileArray = images[i].split("/");
+      let imageFile = imageFileArray[imageFileArray.length - 1];
+      var download = images[i];
+      temporaryDownloadLink.setAttribute("href", download);
+      temporaryDownloadLink.setAttribute("download", download);
+      temporaryDownloadLink.target = "_blank";
+      temporaryDownloadLink.click();
+
+      let file = images[i].replace(".jpg", ".txt");
+      let textFile = imageFile.replace(".jpg", ".txt");
+      textFile = textFileName + "_" + i;
+      axios
+        .get(file)
+        .then((res) => {
+        })
+        .then((blob) => {
+          // Create blob link to download
+          const url = window.URL.createObjectURL(new Blob([blob]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", textFile);
+          // Append to html link element page
+          document.body.appendChild(link);
+          // Start download
+          link.click();
+          // Clean up and remove the link
+          link.parentNode.removeChild(link);
+        });
+    }
+  }
 
   // let interval = setInterval(handleDownload, 300, images);
 
@@ -228,6 +273,12 @@ const ImageControls = () => {
             className="reject-button"
             onClick={statusChange}
             value="Reject"
+          />
+          <input
+            type="button"
+            className="download-button"
+            onClick={handleDownloadAll}
+            value="Download All"
           />
         </>
       ) : null}

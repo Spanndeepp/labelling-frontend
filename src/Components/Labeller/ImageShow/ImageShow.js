@@ -89,7 +89,7 @@ function ImageShow({
     // console.log(seq);
     let resultArr = "";
     array.map((a) => {
-      return (resultArr +=
+      return (resultArr += 
         0 + " " + a.x + " " + a.y + " " + a.w + " " + a.h + "\n");
     });
     // console.log(resultArr);
@@ -182,6 +182,7 @@ function ImageShow({
           className="upload-button"
           onClick={handleUpload}
           value="Upload Image"
+         
         />
       )}
       {/* {currImage && (

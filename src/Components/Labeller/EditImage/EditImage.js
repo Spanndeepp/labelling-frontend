@@ -49,7 +49,7 @@ const EditImage = ({ currImage, array, setArray }) => {
   const drawRect = (e, style = {}) => {
     let rectw = e.pageX - e.nativeEvent.path[0].offsetLeft - xyval.xval;
     let recth = e.pageY - e.nativeEvent.path[0].offsetTop - xyval.yval;
-    const { borderColor = "black", borderWidth = 2 } = style;
+    const { borderColor = "#474747", borderWidth = 2 } = style;
     r.clearRect(0, 0, image.current.clientWidth, image.current.clientHeight);
 
     // console.log(xyval.xval, xyval.yval, rectw, recth);
@@ -86,7 +86,7 @@ const EditImage = ({ currImage, array, setArray }) => {
       if (draw) {
         let rectw = e.pageX - e.nativeEvent.path[0].offsetLeft - xyval.xval;
         let recth = e.pageY - e.nativeEvent.path[0].offsetTop - xyval.yval;
-        const { borderColor = "black", borderWidth = 2 } = style;
+        const { borderColor = "#474747", borderWidth = 2 } = style;
         r.clearRect(
           0,
           0,
@@ -99,7 +99,7 @@ const EditImage = ({ currImage, array, setArray }) => {
         r.beginPath();
 
         r.rect(xyval.xval, xyval.yval, rectw, recth);
-        // console.log(xyval.xval, xyval.yval, rectw, recth);
+        console.log(xyval.xval, xyval.yval, rectw, recth);
         r.stroke();
       }
     };

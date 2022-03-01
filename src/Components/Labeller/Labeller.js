@@ -54,7 +54,15 @@ function Labeller(props) {
   };
 
   const handleSelect = (e) => {
-    setSelectedFiles(e.target.files);
+    var arr = [...e.target.files];
+    var i;
+    for (i = 0; i < e.target.files.length; i++) {
+      if (((e.target.files[i].size / 1024).toFixed(2)) < 25) {
+        arr.splice(i, 1);
+        alert("Image can not be displayed, kindly upload images of size more than 25kb");
+      }
+    }
+    setSelectedFiles(arr);
   };
 
   const [imagesUploaded, setImagesUploaded] = useState(0);
@@ -78,7 +86,7 @@ function Labeller(props) {
         setSnackBarOpen(true);
       });
 
-    return () => {};
+    return () => { };
     //eslint-disable-next-line
   }, [imagesUploaded]);
 
