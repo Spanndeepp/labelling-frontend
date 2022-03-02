@@ -66,6 +66,8 @@ const ViewImage = ({ currImage }) => {
     <div className="image-area">
       <canvas className="canvas-img" tabIndex="0" ref={canvas} />
       <img
+      style={{border: "2px solid black",
+              boxShadow: "4px 4px 4px 4px lightgrey"}}
         className="labelling-img"
         src={currImage}
         ref={image}

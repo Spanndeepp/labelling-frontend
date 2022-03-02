@@ -13,6 +13,8 @@
   margin: 30px;
   max-width: 500px;
   max-height: 450px;
+  border: 2px solid black;
+  box-shadow: 4px 4px 4px 4px lightgrey;
 }
 @media (min-width: 600px) and (max-width: 1000px) {
   .labelling-img {  

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./EditImage.css";
+import { CompactPicker } from "react-color";
 
 const EditImage = ({ currImage, array, setArray }) => {
   // console.log(currImage);
@@ -8,6 +9,7 @@ const EditImage = ({ currImage, array, setArray }) => {
   const canvas = useRef();
   const image = useRef();
   const [xyval, setXY] = useState({ xval: 0, yval: 0 });
+  const [bColor, setColor] = useState("black");
 
   const [r, setR] = useState(null);
   // const [array, setArray] = useState([]);
@@ -49,7 +51,7 @@ const EditImage = ({ currImage, array, setArray }) => {
   const drawRect = (e, style = {}) => {
     let rectw = e.pageX - e.nativeEvent.path[0].offsetLeft - xyval.xval;
     let recth = e.pageY - e.nativeEvent.path[0].offsetTop - xyval.yval;
-    const { borderColor = "#474747", borderWidth = 2 } = style;
+    const { borderColor = bColor, borderWidth = 2 } = style;
     r.clearRect(0, 0, image.current.clientWidth, image.current.clientHeight);
 
     // console.log(xyval.xval, xyval.yval, rectw, recth);
@@ -61,7 +63,7 @@ const EditImage = ({ currImage, array, setArray }) => {
       h: recth / image.current.clientHeight,
     };
 
-    // console.log(array);
+    console.log(array);
     setArray([...array, data]);
 
     r.strokeStyle = borderColor;
@@ -86,7 +88,7 @@ const EditImage = ({ currImage, array, setArray }) => {
       if (draw) {
         let rectw = e.pageX - e.nativeEvent.path[0].offsetLeft - xyval.xval;
         let recth = e.pageY - e.nativeEvent.path[0].offsetTop - xyval.yval;
-        const { borderColor = "#474747", borderWidth = 2 } = style;
+        const { borderColor = bColor , borderWidth = 2 } = style;
         r.clearRect(
           0,
           0,
@@ -118,8 +120,12 @@ const EditImage = ({ currImage, array, setArray }) => {
     setDraw(false);
     drawRect(e);
   };
+  
 
   return (
+    <>
+    
+        
     <div className="image-area">
       <canvas
         className="canvas-img"
@@ -141,6 +147,16 @@ const EditImage = ({ currImage, array, setArray }) => {
         alt="Phone"
       />
     </div>
+    <div>
+          Change color of your box: 
+          <CompactPicker
+            onChangeComplete={(color) => {
+              setColor(color.hex);
+            }}
+           
+          />
+        </div>
+    </>
   );
 };
 

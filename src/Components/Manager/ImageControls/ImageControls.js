@@ -177,6 +177,7 @@ const ImageControls = () => {
       temporaryDownloadLink.click();
 
       let file = images[i].replace(".jpg", ".txt");
+      console.log(images, "all")
       let textFile = imageFile.replace(".jpg", ".txt");
       textFile = textFileName + "_" + i;
       axios
