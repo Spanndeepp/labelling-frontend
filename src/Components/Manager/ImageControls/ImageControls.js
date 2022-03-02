@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./ImageControls.css";
 import ViewImage from "../ViewImage/ViewImage";
+
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -18,6 +20,7 @@ const ImageControls = () => {
   const [error, setError] = useState("");
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [success, setSuccess] = useState("");
+  
 
   // useEffect(() => {
   //   setError("");
@@ -162,42 +165,61 @@ const ImageControls = () => {
 
   // Handle Download All
 
-  const handleDownloadAll = () => {
-    var i;
-    for (i = 0; i < images.length; i++) {
-      var temporaryDownloadLink = document.createElement("a");
-      temporaryDownloadLink.style.display = "none";
-      document.body.appendChild(temporaryDownloadLink);
-      let imageFileArray = images[i].split("/");
-      let imageFile = imageFileArray[imageFileArray.length - 1];
-      var download = images[i];
-      temporaryDownloadLink.setAttribute("href", download);
-      temporaryDownloadLink.setAttribute("download", download);
-      temporaryDownloadLink.target = "_blank";
-      temporaryDownloadLink.click();
+ 
+    const handleDownloadAll = () => {
+  
 
-      let file = images[i].replace(".jpg", ".txt");
-      let textFile = imageFile.replace(".jpg", ".txt");
-      textFile = textFileName + "_" + i;
-      axios
-        .get(file)
-        .then((res) => {
-        })
-        .then((blob) => {
-          // Create blob link to download
-          const url = window.URL.createObjectURL(new Blob([blob]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", textFile);
-          // Append to html link element page
-          document.body.appendChild(link);
-          // Start download
-          link.click();
-          // Clean up and remove the link
-          link.parentNode.removeChild(link);
-        });
-    }
+  
+  
+//     let axiosArray = []
+//   for (let x = 0; x < images.length; x++) {
+ 
+//   let newPromise = axios({
+//       method: 'GET',
+//       url: images[x],
+//       responseType:'blob'
+//     })
+//   axiosArray.push(newPromise)
+// }
+
+// axios
+//   .all(axiosArray)
+//   .then(axios.spread((...responses) => {
+//     responses.forEach(res => {const url = window.URL.createObjectURL(new Blob([res.data]));
+//     const link = document.createElement('a');
+//     link.href = url;
+//     link.setAttribute('download', textFileName+".jpg"); 
+//    document.body.appendChild(link);
+//    link.click();
+//    link.parentNode.removeChild(link);})
+    
+//   }))
+//   .catch(error => {})
+//   }
+
+      for(let item = 0;item < images.length; item++){
+      axios({
+        url: images[item], 
+        method: 'GET',
+        responseType: 'blob',
+         
+    },).then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', textFileName+""+item+".jpg"); 
+        document.body.appendChild(link);
+         //link.click();
+         //link.setAttribute('download', textFileName+""+item+".txt");
+        // document.body.appendChild(link);
+         link.click();
+    });
+   
   }
+    
+       
+  }
+
 
   // let interval = setInterval(handleDownload, 300, images);
 
