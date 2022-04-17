@@ -6,8 +6,9 @@ import { getToken, getUserType, removeUserSession } from "./Common";
 import "../index.css";
 
 // handle the private routes
-function PrivateRoute({ component: Component, ...rest }) {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const history = useHistory();
+  // const [userType, setUserType] = useState(null);
 
   const handleLogout = () => {
     removeUserSession();
@@ -15,9 +16,8 @@ function PrivateRoute({ component: Component, ...rest }) {
   };
 
   useEffect(() => {
-    // console.log(document.getElementsByClassName("links"), screen.width);
     document.getElementById("post-login-dropdown").style.marginLeft =
-      getUserType === "manager"
+      getUserType() === "manager"
         ? window.innerWidth - 450 + "px"
         : window.innerWidth - 130 + "px";
   }, []);
@@ -67,6 +67,6 @@ function PrivateRoute({ component: Component, ...rest }) {
       />
     </>
   );
-}
+};
 
 export default PrivateRoute;
