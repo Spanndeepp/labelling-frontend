@@ -34,3 +34,7 @@ export const setUserSession = (userType, token, user) => {
   if (!localStorage.getItem("userType"))
     localStorage.setItem("userType", JSON.stringify(userType));
 };
+
+export const setUserEmail = (email) => {
+  localStorage.setItem("user", JSON.stringify(email));
+};

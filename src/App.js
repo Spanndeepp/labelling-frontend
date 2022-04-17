@@ -18,6 +18,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import axiosInstance from "./Components/AxiosInstance/AxiosInstance";
 import ShowObj from "./Components/Manager/ShowObj/ShowObj";
 import ImageControls from "./Components/Manager/ImageControls/ImageControls";
+import Profile from "./Components/Profile/Profile";
 
 const App = () => {
   const [authLoading, setAuthLoading] = useState(true);
@@ -71,6 +72,7 @@ const App = () => {
               {/* <PrivateRoute path="/add-object" component={AddObject} /> */}
               <PrivateRoute path="/show-object" component={ShowObj} />
               <PrivateRoute path="/view-images" component={ImageControls} />
+              <PrivateRoute path="/user-profile" component={Profile} />
             </Switch>
           </div>
         </div>

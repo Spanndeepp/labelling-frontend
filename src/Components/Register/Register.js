@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import axiosInstance from "../AxiosInstance/AxiosInstance";
+import "react-phone-number-input/style.css";
 import "./Register.css";
 
 function Alert(props) {
@@ -81,8 +81,8 @@ const Register = () => {
   };
 
   // set the position of error snackbar
-  var vertical = "top";
-  var horizontal = "center";
+  const vertical = "top";
+  const horizontal = "center";
 
   return (
     <div id="registration-container">
