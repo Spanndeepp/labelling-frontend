@@ -43,7 +43,7 @@ body {
   padding: 2px;
   padding-left: 15px;
   padding-right: 15px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .content {
@@ -53,5 +53,81 @@ body {
 .header-label {
   color: #fff;
   padding-top: 5px;
+  margin-left: 10px;
+}
+
+.userImg {
+  height: 50px;
+  width: auto;
+  border-radius: 50%;
+  width: 32px;
+  padding: 4px;
+  height: auto;
+  color: #ffffff;
+  background: #000;
+  margin: 8px;
+}
+
+.dropdown {
+  float: right;
+  position: relative;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  right: 10px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdownContent a {
+  font-size: 15px;
+  color: #6c727c;
+  transition: all 0.3s;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: block;
+  font-weight: 500;
+}
+
+.dropdownContent a:hover {
+  background-color: #e1f9fe;
+  border-radius: 0px;
+}
+
+.dropdown:hover .dropdownContent {
+  display: block;
+}
+
+.links-post-login {
+  padding: 13px 10px;
+}
+
+.links-post-login a {
+  text-decoration: none;
+  color: #8f9bb7;
+  padding: 10px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.links-post-login .active {
+  color: #fff;
+  background: #fa6b2b;
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+
+.links-post-login a:hover {
+  font-weight: bold;
+  color: #fff;
+}
+
+.header-home {
+  color: #fff;
   margin-left: 10px;
 }

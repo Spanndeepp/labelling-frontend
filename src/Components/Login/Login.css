@@ -13,7 +13,7 @@
 
 #loginHeading {
   text-align: center;
-  color: #3770a5;
+  color: #0e2b6d;
   padding-top: 20px;
 }
 
@@ -39,13 +39,14 @@
   margin-top: -22px;
   height: 40px;
   color: white;
-  background-color: #3770a5;
+  background-color: #0e2b6d;
   border: none;
   border-radius: 5px;
+  font-weight: bold;
 }
 
 #login:hover {
-  background-color: #2f6496;
+  background-color: #0a225c;
 }
 
 #login-form-shadow {
@@ -67,4 +68,20 @@
 
 .login-snackbar-log {
   margin-top: 75px;
+}
+
+#registration-page a h4,
+#login-page a h4 {
+  color: #0e2b6d !important;
+}
+
+#registration-page a,
+#login-page a {
+  text-decoration: none;
+}
+
+#registration-page a:hover,
+#login-page a:hover {
+  color: #0a225c !important;
+  text-decoration: underline;
 }

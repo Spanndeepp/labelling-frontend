@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getUser, removeUserSession } from "../../Utils/Common";
+import { getUser } from "../../Utils/Common";
 import ImageShow from "./ImageShow/ImageShow";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import "./Labeller.css";
 import axiosInstance from "../AxiosInstance/AxiosInstance";
+import "./Labeller.css";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -26,16 +26,6 @@ function Labeller(props) {
   });
 
   const email = getUser();
-  if (!email) {
-    alert("Login Again!!!");
-    removeUserSession();
-    props.history.push("/login");
-  }
-
-  const handleLogout = () => {
-    removeUserSession();
-    props.history.push("/login");
-  };
 
   const handleComplete = () => {
     axiosInstance
@@ -109,12 +99,6 @@ function Labeller(props) {
             value="Complete"
           />
         ) : null}
-        <input
-          type="button"
-          className="logout-button style-button"
-          onClick={handleLogout}
-          value="Logout"
-        />
         <p className="object-data">
           Object Assigned -&nbsp;
           <span className="bold-text">{user ? user.obj_assigned : ""}</span>

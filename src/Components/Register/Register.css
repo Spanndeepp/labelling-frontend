@@ -13,7 +13,7 @@
 
 #registerHeading {
   text-align: center;
-  color: #3770a5;
+  color: #0e2b6d;
   padding-top: 10px;
 }
 
@@ -49,13 +49,13 @@
   margin-top: 10px;
   height: 40px;
   color: white;
-  background-color: #3770a5;
+  background-color: #0e2b6d;
   border: none;
   border-radius: 5px;
 }
 
 #submitDetails:hover {
-  background-color: #2f6496;
+  background-color: #0a225c;
 }
 
 /* .labels {
@@ -116,6 +116,7 @@ input#lastName {
   justify-content: center;
   margin-bottom: -30px;
 }
+
 .register-radio-value {
   display: flex;
   align-items: center;
@@ -123,6 +124,7 @@ input#lastName {
   color: gray;
   font-size: x-large;
 }
+
 .register-radio-value input {
   margin-bottom: 10px;
   margin-right: 10px;

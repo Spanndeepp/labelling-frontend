@@ -100,7 +100,7 @@ const Register = () => {
               </div>
               <div className="register-radio-value">
                 <input type="radio" value="manager" name="radio" />
-                <p>Manager</p>
+                <p>Admin</p>
               </div>
             </div>
             <div className="register-input-styles register-input-width">
@@ -195,20 +195,6 @@ const Register = () => {
                 </Snackbar>
               </>
             )}
-            {/* <div className="register-input-styles">
-              <select
-                className="register-box register-single-box register-drop-down "
-                id="gender"
-                name="gender"
-                onChange={handleInputs}
-              >
-                <option value="gender">Select Gender</option>
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-                <option value="OTHERS">Others</option>
-              </select>
-              <br />
-            </div> */}
             <div className="register-input-styles register-submit-btn">
               <input
                 id="submitDetails"

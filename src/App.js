@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Switch } from "react-router-dom";
 import Login from "./Components/Login/Login";
-// import Dashboard from "./Components/Dashboard/Dashboard";
 import Home from "./Components/Home/Home";
 import Manager from "./Components/Manager/Manager";
 import Labeller from "./Components/Labeller/Labeller";
@@ -17,6 +16,8 @@ import {
 import Register from "./Components/Register/Register";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import axiosInstance from "./Components/AxiosInstance/AxiosInstance";
+import ShowObj from "./Components/Manager/ShowObj/ShowObj";
+import ImageControls from "./Components/Manager/ImageControls/ImageControls";
 
 const App = () => {
   const [authLoading, setAuthLoading] = useState(true);
@@ -67,6 +68,9 @@ const App = () => {
               <PrivateRoute path="/dashboard" component={Dashboard} />
               <PrivateRoute path="/manager" component={Manager} />
               <PrivateRoute path="/labeller" component={Labeller} />
+              {/* <PrivateRoute path="/add-object" component={AddObject} /> */}
+              <PrivateRoute path="/show-object" component={ShowObj} />
+              <PrivateRoute path="/view-images" component={ImageControls} />
             </Switch>
           </div>
         </div>

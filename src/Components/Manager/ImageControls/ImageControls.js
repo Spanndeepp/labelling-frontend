@@ -166,6 +166,7 @@ const ImageControls = () => {
 
   return (
     <div className="add-object">
+      <h1>View Images of Object</h1>
       <input
         type="text"
         className="input-object"
