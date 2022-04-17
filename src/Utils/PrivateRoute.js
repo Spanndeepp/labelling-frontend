@@ -45,7 +45,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <Person id="user" fontSize="large" className="userImg" />
             <div className="dropdownContent">
               <NavLink to="/user-profile">View Profile</NavLink>
-              <NavLink to="/settings">Change Password</NavLink>
+              <NavLink to="/change-password">Change Password</NavLink>
               <NavLink to="/" onClick={handleLogout}>
                 Logout
               </NavLink>

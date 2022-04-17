@@ -1,58 +1,42 @@
-import React, { useEffect, useState } from "react";
-import PhoneInput from "react-phone-number-input";
+import React, { useState } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { getUser, getUserType, setUserEmail } from "../../Utils/Common";
+import { getUser, getUserType } from "../../Utils/Common";
 import axiosInstance from "../AxiosInstance/AxiosInstance";
-import "react-phone-number-input/style.css";
-import "./Profile.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const Profile = () => {
-  const [user, setUser] = useState(null);
-  const [oldEmail, setOldEmail] = useState(null);
+const ChangePassword = () => {
+  const [user, setUser] = useState({ newPassword: "", confNewPassword: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const userType = getUserType();
+  const email = getUser();
 
-  useEffect(() => {
-    const url =
-      userType === "manager" ? "/api/auth/getManager" : "/api/auth/getLabeller";
-    const email = getUser();
-    axiosInstance
-      .post(url, {
-        email,
-      })
-      .then((res) => {
-        console.log(res.data[userType]);
-        setUser(res.data[userType]);
-        setOldEmail(res.data[userType].email);
-      });
-  }, [userType]);
-
-  const handleUpdateProfile = async () => {
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault();
     try {
       setError("");
       setSuccess("");
-      if (user.name === "") {
-        setError("Name is Missing!!!");
-      } else if (user.email === "") {
-        setError("Email is Missing!!!");
-      } else if (user.phone === "") {
-        setError("Phone is Missing!!!");
+      if (user.password === "") {
+        setError("Current Password is Required!!!");
+      } else if (user.newPassword === "") {
+        setError("New Password is Missing!!!");
+      } else if (user.confNewPassword === "") {
+        setError("Confirm New Password is Missing!!!");
+      } else if (user.confNewPassword !== user.newPassword) {
+        setError("New Password and Confirm New Password don't match!!!");
       } else {
         setLoading(true);
         await axiosInstance.put(
-          `/api/auth/updateProfile?oldEmail=${oldEmail}&userType=${userType}`,
+          `/api/auth/changePassword?email=${email}&password=${user.password}&userType=${userType}`,
           user
         );
-        setUserEmail(user.email);
-        setSuccess("Email Updated Successfully!!!");
+        setSuccess("Password Changed Successfully!!!");
       }
     } catch (err) {
       console.error(err.response);
@@ -60,6 +44,7 @@ const Profile = () => {
     } finally {
       setSnackBarOpen(true);
       setLoading(false);
+      setUser({ newPassword: "", confNewPassword: "", password: "" });
     }
   };
 
@@ -82,54 +67,58 @@ const Profile = () => {
           <div className="up__form w-50 mb-5">
             <form>
               <div className="up__heading text-center mt-2">
-                <h2>View/Update Profile</h2>
+                <h2>Change Password</h2>
                 <hr className="mx-35 my-3" />
-                <h4 className="mb-2">
-                  {user.name.toUpperCase()} ({userType.toUpperCase()})
-                </h4>
               </div>
 
               <div className="row justify-content-between">
                 <div className="form-group col-12 mb-2">
-                  <label htmlFor="in__first" className="mb-1">
-                    First Name
+                  <label htmlFor="password" className="mb-1">
+                    Current Password
                   </label>
                   <input
                     className="form-control bg-white mb-1"
-                    type="text"
-                    name="firstname"
-                    value={user.name}
-                    id="in__first"
-                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    type="password"
+                    name="password"
+                    value={user.password}
+                    id="password"
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })
+                    }
                   />
                 </div>
               </div>
 
               <div className="row justify-content-center">
                 <div className="form-group row-cols-1 mb-2">
-                  <label htmlFor="in__email" className="mb-1">
-                    Email
+                  <label htmlFor="newPassword" className="mb-1">
+                    New Password
                   </label>
                   <input
                     className="form-control bg-white mb-1"
-                    type="text"
-                    id="in__email"
-                    name="email"
-                    value={user.email}
+                    type="password"
+                    id="newPassword"
+                    name="newPassword"
+                    value={user.newPassword}
                     onChange={(e) =>
-                      setUser({ ...user, email: e.target.value })
+                      setUser({ ...user, newPassword: e.target.value })
                     }
                   />
                 </div>
 
                 <div className="form-group row-cols-1 mb-2">
-                  <label htmlFor="in__phn mb-1">Phone</label>
-                  <PhoneInput
+                  <label htmlFor="confNewPassword" className="mb-1">
+                    Confirm New Password
+                  </label>
+                  <input
                     className="form-control bg-white mb-1"
-                    id="in__phn"
-                    name="phone"
-                    value={user.phone}
-                    onChange={(value) => setUser({ ...user, phone: value })}
+                    type="password"
+                    id="confNewPassword"
+                    name="confNewPassword"
+                    value={user.confNewPassword}
+                    onChange={(e) =>
+                      setUser({ ...user, confNewPassword: e.target.value })
+                    }
                   />
                 </div>
               </div>
@@ -148,7 +137,7 @@ const Profile = () => {
                         aria-hidden="true"
                       />
                     )}{" "}
-                    Update Profile
+                    Change Password
                   </button>
                 </div>
               </div>
@@ -190,4 +179,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ChangePassword;
