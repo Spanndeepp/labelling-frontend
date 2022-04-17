@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Switch } from "react-router-dom";
-import axios from "axios";
 import Login from "./Components/Login/Login";
 // import Dashboard from "./Components/Dashboard/Dashboard";
 import Home from "./Components/Home/Home";
@@ -17,6 +16,7 @@ import {
 } from "./Utils/Common";
 import Register from "./Components/Register/Register";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import axiosInstance from "./Components/AxiosInstance/AxiosInstance";
 
 const App = () => {
   const [authLoading, setAuthLoading] = useState(true);
@@ -30,8 +30,8 @@ const App = () => {
 
     const userType = getUserType();
     if (!userType) return;
-    axios
-      .get(`https://labelling-backend.herokuapp.com/api/auth/me`, {
+    axiosInstance
+      .get(`/api/auth/me`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",

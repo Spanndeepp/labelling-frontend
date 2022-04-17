@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import axiosInstance from "../../AxiosInstance/AxiosInstance";
 import "./AddObject.css";
 
 const Alert = (props) => {
@@ -21,8 +21,8 @@ const AddObject = () => {
   const AddObject = () => {
     setSuccess("");
     setError("");
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/addObject", {
+    axiosInstance
+      .post("/api/auth/addObject", {
         objectName: object,
       })
       .then((res) => {

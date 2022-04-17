@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import axiosInstance from "../AxiosInstance/AxiosInstance";
 import "./Register.css";
 
 function Alert(props) {
@@ -47,13 +47,9 @@ const Register = () => {
     else if (user.password.length < 5)
       setError("Minimum length of password is 5 characters");
     else {
-      if (user.userType === "labeller")
-        url =
-          "https://labelling-backend.herokuapp.com/api/auth/registerLabeller";
-      else
-        url =
-          "https://labelling-backend.herokuapp.com/api/auth/registerManager";
-      axios
+      if (user.userType === "labeller") url = "/api/auth/registerLabeller";
+      else url = "/api/auth/registerManager";
+      axiosInstance
         .post(url, {
           email: user.email,
           name: user.name,

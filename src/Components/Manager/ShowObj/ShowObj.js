@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import axios from "axios";
-import "./ShowObj.css";
 import ObjTable from "./ObjTable";
+import axiosInstance from "../../AxiosInstance/AxiosInstance";
+import "./ShowObj.css";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -17,8 +17,8 @@ const ShowObj = () => {
 
   useEffect(() => {
     setError("");
-    axios
-      .get("https://labelling-backend.herokuapp.com/api/auth/getObject")
+    axiosInstance
+      .get("/api/auth/getObject")
       .then((res) => {
         setRows(res.data.objects);
         console.log(rows);

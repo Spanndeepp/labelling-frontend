@@ -1,9 +1,9 @@
-import axios from "axios";
 import React, { useEffect, useState, useRef } from "react";
 import EditImage from "../EditImage/EditImage";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import DoneIcon from "@material-ui/icons/Done";
+import axiosInstance from "../../AxiosInstance/AxiosInstance";
 import "./ImageShow.css";
 
 const Alert = (props) => {
@@ -37,7 +37,7 @@ function ImageShow({
   // useEffect(() => {
   //   setError("");
   //   obj_assigned && axios
-  //     .post("https://labelling-backend.herokuapp.com/api/auth/getOneObject", {
+  //     .post("https://labelling-tool-backend.herokuapp.com/api/auth/getOneObject", {
   //       objectName: obj_assigned,
   //     })
   //     .then((res) => {
@@ -114,11 +114,8 @@ function ImageShow({
 
     setSuccess("");
     setError("");
-    axios
-      .post(
-        "https://labelling-backend.herokuapp.com/api/upload/object",
-        formData
-      )
+    axiosInstance
+      .post("/api/upload/object", formData)
       .then((res) => {
         setSuccess("Object Uploaded");
         uploaded.current[count] = true;

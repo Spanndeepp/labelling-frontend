@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { setUserSession } from "../../Utils/Common";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./Login.css";
+import axiosInstance from "../AxiosInstance/AxiosInstance";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -27,8 +27,8 @@ const Login = (props) => {
     setSnackBarOpen(true);
     setError(null);
     setLoading(true);
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/login", {
+    axiosInstance
+      .post("/api/auth/login", {
         email: email.value,
         password: password.value,
       })

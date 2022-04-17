@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getUser, removeUserSession } from "../../Utils/Common";
-import axios from "axios";
 import ImageShow from "./ImageShow/ImageShow";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import "./Labeller.css";
+import axiosInstance from "../AxiosInstance/AxiosInstance";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -38,8 +38,8 @@ function Labeller(props) {
   };
 
   const handleComplete = () => {
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/completeObj", {
+    axiosInstance
+      .post("/api/auth/completeObj", {
         email,
       })
       .then((res) => {
@@ -62,8 +62,8 @@ function Labeller(props) {
   useEffect(() => {
     setError("");
     // console.log("UseEffect1");
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
+    axiosInstance
+      .post("/api/auth/getLabeller", {
         email,
       })
       .then((res) => {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { removeUserSession, getUser } from "../../Utils/Common";
-import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Form from "react-bootstrap/Form";
@@ -10,6 +9,7 @@ import AddObject from "./AddObject/AddObject";
 import "./Manager.css";
 import ShowObj from "./ShowObj/ShowObj";
 import ImageControls from "./ImageControls/ImageControls";
+import axiosInstance from "../AxiosInstance/AxiosInstance";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -31,8 +31,8 @@ function Manager(props) {
 
   useEffect(() => {
     setError("");
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getManager", {
+    axiosInstance
+      .post("/api/auth/getManager", {
         email,
       })
       .then((res) => {

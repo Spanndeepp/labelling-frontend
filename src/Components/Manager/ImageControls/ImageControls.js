@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import "./ImageControls.css";
 import ViewImage from "../ViewImage/ViewImage";
+import axiosInstance from "../../AxiosInstance/AxiosInstance";
+import "./ImageControls.css";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -21,7 +21,7 @@ const ImageControls = () => {
   // useEffect(() => {
   //   setError("");
   //   axios
-  //     .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
+  //     .post("https://labelling-tool-backend.herokuapp.com/api/auth/getLabeller", {
   //       email: "adityakhandelwal4201@gmail.com",
   //     })
   //     .then((res) => {
@@ -43,8 +43,8 @@ const ImageControls = () => {
 
   const getImages = () => {
     setError("");
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getPics", {
+    axiosInstance
+      .post("/api/auth/getPics", {
         objectName: object,
       })
       .then((res) => {
@@ -95,8 +95,8 @@ const ImageControls = () => {
     let status = "";
     if (e.target.value === "Accept") status = "Accepted";
     else if (e.target.value === "Reject") status = "Rejected";
-    axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/changeStatus", {
+    axiosInstance
+      .post("/api/auth/changeStatus", {
         object,
         status,
       })
@@ -133,7 +133,7 @@ const ImageControls = () => {
     let file = images[count].replace(".jpg", ".txt");
     let textFile = imageFile.replace(".jpg", ".txt");
 
-    axios
+    axiosInstance
       .get(file)
       .then((res) => {
         // const blob = res.blob();
