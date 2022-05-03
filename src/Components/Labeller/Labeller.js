@@ -39,7 +39,7 @@ function Labeller(props) {
 
   const handleComplete = () => {
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/completeObj", {
+      .post("http://localhost:4000/api/auth/completeObj", {
         email,
       })
       .then((res) => {
@@ -71,7 +71,7 @@ function Labeller(props) {
     setError("");
     // console.log("UseEffect1");
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
+      .post("http://localhost:4000/api/auth/getLabeller", {
         email,
       })
       .then((res) => {
@@ -109,14 +109,15 @@ function Labeller(props) {
     <>
       <div className="labeller-info">
         Hello Labeller <span className="bold-text">{user.name}</span>
-        {user.images.length >= 200 ? (
+        {user.images.length >= 200 && (
           <input
             type="button"
             onClick={handleComplete}
             className="complete-button"
             value="Complete"
           />
-        ) : null}
+        )}
+        
         <input
           type="button"
           className="logout-button style-button"
@@ -164,6 +165,7 @@ function Labeller(props) {
           </>
         )}
       </div>
+      
     </>
   );
 }

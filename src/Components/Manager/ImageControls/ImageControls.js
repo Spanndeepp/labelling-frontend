@@ -25,7 +25,7 @@ const ImageControls = () => {
   // useEffect(() => {
   //   setError("");
   //   axios
-  //     .post("https://labelling-backend.herokuapp.com/api/auth/getLabeller", {
+  //     .post("http://localhost:4000/api/auth/getLabeller", {
   //       email: "adityakhandelwal4201@gmail.com",
   //     })
   //     .then((res) => {
@@ -49,7 +49,7 @@ const ImageControls = () => {
   const getImages = () => {
     setError("");
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getPics", {
+      .post("http://localhost:4000/api/auth/getPics", {
         objectName: object,
       })
       .then((res) => {
@@ -102,7 +102,7 @@ const ImageControls = () => {
     if (e.target.value === "Accept") status = "Accepted";
     else if (e.target.value === "Reject") status = "Rejected";
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/changeStatus", {
+      .post("http://localhost:4000/api/auth/changeStatus", {
         object,
         status,
       })
@@ -169,30 +169,7 @@ const ImageControls = () => {
     const handleDownloadAll = () => {
   
 
-<<<<<<< HEAD
-      let file = images[i].replace(".jpg", ".txt");
-      console.log(images, "all")
-      let textFile = imageFile.replace(".jpg", ".txt");
-      textFile = textFileName + "_" + i;
-      axios
-        .get(file)
-        .then((res) => {
-        })
-        .then((blob) => {
-          // Create blob link to download
-          const url = window.URL.createObjectURL(new Blob([blob]));
-          const link = document.createElement("a");
-          link.href = url;
-          link.setAttribute("download", textFile);
-          // Append to html link element page
-          document.body.appendChild(link);
-          // Start download
-          link.click();
-          // Clean up and remove the link
-          link.parentNode.removeChild(link);
-        });
-    }
-=======
+
   
   
 //     let axiosArray = []
@@ -239,7 +216,6 @@ const ImageControls = () => {
          link.click();
     });
    
->>>>>>> 3fe97afdc990b27fecd4c17acc7ba9838bd4dc6b
   }
     
        

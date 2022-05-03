@@ -32,7 +32,7 @@ function Manager(props) {
   useEffect(() => {
     setError("");
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/getManager", {
+      .post("http://localhost:4000/api/auth/getManager", {
         email,
       })
       .then((res) => {

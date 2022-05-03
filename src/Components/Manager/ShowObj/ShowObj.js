@@ -18,7 +18,7 @@ const ShowObj = () => {
   useEffect(() => {
     setError("");
     axios
-      .get("https://labelling-backend.herokuapp.com/api/auth/getObject")
+      .get("http://localhost:4000/api/auth/getObject")
       .then((res) => {
         setRows(res.data.objects);
         console.log(rows);

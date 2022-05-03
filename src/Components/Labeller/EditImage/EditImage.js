@@ -63,7 +63,7 @@ const EditImage = ({ currImage, array, setArray }) => {
       h: recth / image.current.clientHeight,
     };
 
-    console.log(array);
+    console.log("arraty",array);
     setArray([...array, data]);
 
     r.strokeStyle = borderColor;

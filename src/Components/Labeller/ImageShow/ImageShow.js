@@ -37,7 +37,7 @@ function ImageShow({
   // useEffect(() => {
   //   setError("");
   //   obj_assigned && axios
-  //     .post("https://labelling-backend.herokuapp.com/api/auth/getOneObject", {
+  //     .post("http://localhost:4000/api/auth/getOneObject", {
   //       objectName: obj_assigned,
   //     })
   //     .then((res) => {
@@ -96,27 +96,41 @@ function ImageShow({
     const blob = new Blob([resultArr], {
       type: "text/plain",
     });
-    // const element = document.createElement("a");
-    // element.href = URL.createObjectURL(file);
-    // element.download = "myFile.txt";
-    // document.body.appendChild(element); // Required for this to work in FireFox
-    // element.click();
+
+   
+  
     const file = new File(
       [blob],
       selectedFiles[count].name.replace("jpg", "txt"),
       { type: "text/plain" }
     );
+    const element = document.createElement("a");
+    element.href = URL.createObjectURL(file);
+    element.download = "myFile.txt";
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+
+      const url = window.URL.createObjectURL(new Blob([selectedFiles[count]]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', "img.jpg"); 
+      document.body.appendChild(link);
+       //link.click();
+       //link.setAttribute('download', textFileName+""+item+".txt");
+      // document.body.appendChild(link);
+       link.click();
+
     const formData = new FormData();
     formData.append("email", email);
     formData.append("obj_assigned", obj_assigned);
     formData.append("image", selectedFiles[count]);
     formData.append("text", file);
-
+    console.log("email"+email+"obj_assigned"+obj_assigned+"img"+selectedFiles[count]+"text"+file)
     setSuccess("");
     setError("");
     axios
       .post(
-        "https://labelling-backend.herokuapp.com/api/upload/object",
+        "http://localhost:4000/api/upload/object",
         formData
       )
       .then((res) => {
@@ -143,6 +157,7 @@ function ImageShow({
   // const TextFile = () => {
 
   // };
+
 
   return (
     <>
@@ -176,6 +191,7 @@ function ImageShow({
         disabled={count === 0}
         value="Reset"
       />
+       
       {currImage && (
         <input
           type="button"

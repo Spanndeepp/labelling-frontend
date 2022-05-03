@@ -22,7 +22,7 @@ const AddObject = () => {
     setSuccess("");
     setError("");
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/addObject", {
+      .post("http://localhost:4000/api/auth/addObject", {
         objectName: object,
       })
       .then((res) => {

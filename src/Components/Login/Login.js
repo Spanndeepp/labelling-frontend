@@ -28,7 +28,7 @@ const Login = (props) => {
     setError(null);
     setLoading(true);
     axios
-      .post("https://labelling-backend.herokuapp.com/api/auth/login", {
+      .post("http://localhost:4000/api/auth/login", {
         email: email.value,
         password: password.value,
       })

@@ -31,7 +31,7 @@ const App = () => {
     const userType = getUserType();
     if (!userType) return;
     axios
-      .get(`https://labelling-backend.herokuapp.com/api/auth/me`, {
+      .get(`http://localhost:4000/api/auth/me`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "JWT fefege...",
