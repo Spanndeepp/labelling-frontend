@@ -29,7 +29,7 @@ const Profile = () => {
         email,
       })
       .then((res) => {
-        console.log(res.data[userType]);
+        // console.log(res.data[userType]);
         setUser(res.data[userType]);
         setOldEmail(res.data[userType].email);
       });

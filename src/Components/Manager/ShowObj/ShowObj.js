@@ -21,7 +21,7 @@ const ShowObj = () => {
       .get("/api/auth/getObject")
       .then((res) => {
         setRows(res.data.objects);
-        console.log(rows);
+        // console.log(rows);
       })
       .catch((err) => {
         setError("Something went wrong...");

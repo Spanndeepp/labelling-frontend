@@ -10,7 +10,7 @@ const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
-function Labeller(props) {
+const Labeller = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [sendFiles, setSendFiles] = useState([]);
   const [initialCount, setInitialCount] = useState(0);
@@ -84,8 +84,8 @@ function Labeller(props) {
     setSnackBarOpen(false);
   };
 
-  var vertical = "top";
-  var horizontal = "center";
+  const vertical = "top";
+  const horizontal = "center";
 
   return (
     <>
@@ -142,6 +142,6 @@ function Labeller(props) {
       </div>
     </>
   );
-}
+};
 
 export default Labeller;

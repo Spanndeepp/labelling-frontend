@@ -50,6 +50,7 @@ const Login = (props) => {
       })
       .catch((error) => {
         setLoading(false);
+        console.error(error.response);
         if (error.response.status === 400)
           setError("Some of the fields are missing!!");
         else if (error.response.status === 401)

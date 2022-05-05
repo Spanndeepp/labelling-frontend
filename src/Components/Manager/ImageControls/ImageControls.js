@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import axios from "axios";
 import ViewImage from "../ViewImage/ViewImage";
 import axiosInstance from "../../AxiosInstance/AxiosInstance";
 import "./ImageControls.css";
@@ -100,7 +101,7 @@ const ImageControls = () => {
         object,
         status,
       })
-      .then((res) => {
+      .then(() => {
         setSuccess("Status Changed Successfully!!");
         // console.log(res);
       })
@@ -119,13 +120,13 @@ const ImageControls = () => {
     //   .then((res) => {
     //     console.log(res);
     //   });
-    var temporaryDownloadLink = document.createElement("a");
+    const temporaryDownloadLink = document.createElement("a");
     temporaryDownloadLink.style.display = "none";
     document.body.appendChild(temporaryDownloadLink);
     // console.log(images[count]);
     let imageFileArray = images[count].split("/");
     let imageFile = imageFileArray[imageFileArray.length - 1];
-    var download = images[count];
+    const download = images[count];
     temporaryDownloadLink.setAttribute("href", download);
     temporaryDownloadLink.setAttribute("download", download);
     temporaryDownloadLink.target = "_blank";
@@ -133,25 +134,21 @@ const ImageControls = () => {
     let file = images[count].replace(".jpg", ".txt");
     let textFile = imageFile.replace(".jpg", ".txt");
 
-    axiosInstance
-      .get(file)
-      .then((res) => {
-        // const blob = res.blob();
-        // console.log(res);
-      })
-      .then((blob) => {
-        // Create blob link to download
-        const url = window.URL.createObjectURL(new Blob([blob]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", textFile);
-        // Append to html link element page
-        document.body.appendChild(link);
-        // Start download
-        link.click();
-        // Clean up and remove the link
-        link.parentNode.removeChild(link);
-      });
+    axios.get(file).then((res) => {
+      console.log(res);
+      const url = URL.createObjectURL(
+        new Blob([res.data], { type: "text/plain" })
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", textFile);
+      // Append to html link element page
+      document.body.appendChild(link);
+      // Start download
+      link.click();
+      // Clean up and remove the link
+      link.parentNode.removeChild(link);
+    });
   };
 
   // let interval = setInterval(handleDownload, 300, images);
